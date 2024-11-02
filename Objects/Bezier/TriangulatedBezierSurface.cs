@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Objects.Basics;
+using Objects.RotationAndTriangulation;
 
-namespace Objects.Triangulation
+namespace Objects.Bezier
 {
     public class TriangulatedBezierSurface : BezierSufrace
     {
         private int _alpha;
-        public int Alpha {
+        public int Alpha
+        {
             get { return _alpha; }
-            set 
+            set
             {
                 if (value == _alpha)
                     return;
@@ -33,19 +34,19 @@ namespace Objects.Triangulation
             }
         }
         private int _n = 0;
-        public int N 
+        public int N
         {
-            get { return _n; } 
-            set 
+            get { return _n; }
+            set
             {
                 if (value == _n)
                     return;
                 _n = value;
                 Triangulation();
-            } 
+            }
         }
         public Vertex[,] TrianglePoints { get { return _points; } }
-        private Vertex[,] _points = new Vertex[0,0];
+        private Vertex[,] _points = new Vertex[0, 0];
         private Triangle[] _triangles = [];
         public Triangle[] Triangles { get { return _triangles; } }
         public TriangulatedBezierSurface(string file, int n) : base(file)
@@ -62,10 +63,10 @@ namespace Objects.Triangulation
             float step = 1f / N;
             {
                 int i = 0, j;
-                for (float u = 0f; u <= 1f + step/2; u += step, ++i)
+                for (float u = 0f; u <= 1f + step / 2; u += step, ++i)
                 {
                     j = 0;
-                    for (float v = 0f; v <= 1f + step/2; v += step, ++j)
+                    for (float v = 0f; v <= 1f + step / 2; v += step, ++j)
                     {
                         _points[i, j].P = P(u, v);
                     }
@@ -78,11 +79,11 @@ namespace Objects.Triangulation
                 for (int j = 0; j < N; j++)
                 {
                     tempTriangles.Add(new Triangle(
-                        _points[i, j].P, 
-                        _points[i, j + 1].P, 
+                        _points[i, j].P,
+                        _points[i, j + 1].P,
                         _points[i + 1, j].P));
                     tempTriangles.Add(new Triangle(
-                        _points[i , j + 1].P,
+                        _points[i, j + 1].P,
                         _points[i + 1, j].P,
                         _points[i + 1, j + 1].P));
                 }

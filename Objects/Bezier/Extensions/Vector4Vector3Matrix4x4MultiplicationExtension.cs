@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System.Numerics;
 
-namespace Objects.Basics.Extensions
+namespace Objects.Bezier.Extensions
 {
     public static class Vector4Vector3Matrix4x4MultiplicationExtension
     {

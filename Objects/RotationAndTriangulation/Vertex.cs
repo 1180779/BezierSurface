@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Objects.Basics
+namespace Objects.RotationAndTriangulation
 {
     public struct Vertex
     {

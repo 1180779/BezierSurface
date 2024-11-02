@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Numerics;
-using Objects.Basics;
 
-namespace Objects.Triangulation
+namespace Objects.RotationAndTriangulation
 {
     public class Triangle
     {

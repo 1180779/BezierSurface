@@ -1,5 +1,5 @@
 ﻿using Drawing.Basics;
-using Objects.Basics;
+using Objects.Bezier;
 using System;
 using System.Collections.Generic;
 using System.Linq;

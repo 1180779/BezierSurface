@@ -1,7 +1,7 @@
 ﻿using Drawing.Basics;
 using Drawing.Bezier;
 using Drawing.RotationAndTriangulation;
-using Objects.Basics;
+using Objects.Bezier;
 using System;
 using System.Collections.Generic;
 using System.Linq;

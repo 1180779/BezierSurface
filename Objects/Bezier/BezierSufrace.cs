@@ -4,9 +4,10 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using Objects.Basics.Extensions;
+using Objects.Bezier.Extensions;
+using Objects.RotationAndTriangulation;
 
-namespace Objects.Basics
+namespace Objects.Bezier
 {
     public class BezierSufrace
     {

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Objects.RotationAndTriangulation;
 
-namespace Objects.Basics
+namespace Objects.Bezier
 {
     // inspired by 
     // https://esezam.okno.pw.edu.pl/mod/book/view.php?id=22&chapterid=249

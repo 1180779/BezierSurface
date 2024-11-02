@@ -2,8 +2,7 @@ using System.Drawing;
 
 using Drawing;
 using Drawing.Basics;
-using Objects.Basics;
-using Objects.Triangulation;
+using Objects.Bezier;
 
 namespace BezierSurface
 {

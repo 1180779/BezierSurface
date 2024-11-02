@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System.Numerics;
 
-namespace Objects.Basics
+namespace Objects.Bezier
 {
     public class Vector3Vector4
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Drawing.Basics;
-using Objects.Triangulation;
+using Objects.Bezier;
 
 namespace Drawing.Bezier
 {

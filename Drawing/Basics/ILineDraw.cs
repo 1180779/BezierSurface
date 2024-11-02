@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Numerics;
-using Objects.Basics;
+using Objects.RotationAndTriangulation;
 
 namespace Drawing.Basics
 {
