@@ -1,11 +1,14 @@
-﻿using Objects.Triangulation;
+﻿using Drawing.Basics;
+using Drawing.Bezier;
+using Drawing.RotationAndTriangulation;
+using Objects.Triangulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drawing.Concrete
+namespace Drawing.Bezier.Concrete
 {
     public class LibraryTriangulatedBezierDraw : ITriangulatedBezierDraw
     {

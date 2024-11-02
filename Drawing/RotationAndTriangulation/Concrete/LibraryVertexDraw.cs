@@ -1,11 +1,13 @@
-﻿using Objects.Triangulation;
+﻿using Drawing.Basics;
+using Drawing.RotationAndTriangulation;
+using Objects.Basics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drawing.Concrete
+namespace Drawing.RotationAndTriangulation.Concrete
 {
     public class LibraryVertexDraw : IVertexDraw
     {

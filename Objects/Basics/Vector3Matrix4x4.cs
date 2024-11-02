@@ -25,6 +25,18 @@ namespace Objects.Basics
                 throw new InvalidOperationException();
             return new Vector3(_x[i, j], _y[i, j], _z[i, j]);
         }
+        public Vector3Matrix4x4(Vertex[,] vMatrix)
+        {
+            for (int i = 0; i < 4; ++i)
+            {
+                for (int j = 0; j < 4; ++j)
+                {
+                    _x[i, j] = vMatrix[i, j].P.X;
+                    _y[i, j] = vMatrix[i, j].P.Y;
+                    _z[i, j] = vMatrix[i, j].P.Z;
+                }
+            }
+        }
         public Vector3Matrix4x4(Vector3[,] vMatrix)
         {
             for (int i = 0; i < 4; ++i)

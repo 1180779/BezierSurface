@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Drawing.Basics;
 using Objects.Triangulation;
 
-namespace Drawing
+namespace Drawing.Bezier
 {
     public interface ITriangulatedBezierDraw
     {

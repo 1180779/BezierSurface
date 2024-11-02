@@ -1,6 +1,7 @@
 using System.Drawing;
 
 using Drawing;
+using Drawing.Basics;
 using Objects.Basics;
 using Objects.Triangulation;
 
@@ -74,6 +75,7 @@ namespace BezierSurface
             _drawingData.G = g;
 
             g.Clear(Color.White);
+            DrawingConfig.DrawBezier(_surface, _drawingData);
             DrawingConfig.DrawTriangulatedBezier(_surface, _drawingData);
 
             _drawingData.G = null;

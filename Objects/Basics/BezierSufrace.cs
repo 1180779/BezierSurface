@@ -23,13 +23,13 @@ namespace Objects.Basics
 
         public Vector3Matrix4x4 V { get { return _V; } }
         private Vector3Matrix4x4 _V;
-        public Vector3[,] Points { get { return _v; } }
-        private Vector3[,] _v;
+        public Vertex[,] Points { get { return _v; } }
+        private Vertex[,] _v;
 
         public BezierSufrace(string file)
         {
             var stream = new StreamReader(file);
-            _v = new Vector3[4, 4];
+            _v = new Vertex[4, 4];
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; ++j)
@@ -37,14 +37,14 @@ namespace Objects.Basics
                     var line = stream.ReadLine() ?? throw new InvalidDataException();
                     Vector3 vec = new();
                     vec.ReadFromLine(line);
-                    _v[i, j] = vec;
+                    _v[i, j].P = vec;
                 }
             }
             stream.Close();
             _V = new Vector3Matrix4x4(_v);
         }
 
-        public Vector3 this[int i, int j]
+        public Vertex this[int i, int j]
         {
             get { return _v[i, j]; }
             set { _v[i, j] = value; }

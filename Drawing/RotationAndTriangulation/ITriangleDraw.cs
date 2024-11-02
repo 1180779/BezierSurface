@@ -1,11 +1,12 @@
-﻿using Objects.Triangulation;
+﻿using Drawing.Basics;
+using Objects.Triangulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drawing
+namespace Drawing.RotationAndTriangulation
 {
     public interface ITriangleDraw
     {

@@ -1,17 +1,19 @@
-﻿using Objects.Triangulation;
+﻿using Drawing.Basics;
+using Drawing.RotationAndTriangulation;
+using Objects.Triangulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drawing.Concrete
+namespace Drawing.RotationAndTriangulation.Concrete
 {
     public class LibraryTriangleDraw : ITriangleDraw
     {
         public ILineDraw LineDraw { get; set; }
         public IVector3Draw Vector3Draw { get; set; }
-        public LibraryTriangleDraw(IVector3Draw vector3Draw, ILineDraw lineDraw) 
+        public LibraryTriangleDraw(IVector3Draw vector3Draw, ILineDraw lineDraw)
         {
             LineDraw = lineDraw;
             Vector3Draw = vector3Draw;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using System.Numerics;
 
-namespace Drawing
+namespace Drawing.Basics
 {
     public interface IVector3Draw
     {

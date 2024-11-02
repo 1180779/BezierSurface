@@ -1,19 +1,22 @@
-﻿using Objects.Basics;
+﻿using Drawing.Basics;
+using Drawing.Bezier;
+using Drawing.RotationAndTriangulation;
+using Objects.Basics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drawing.Concrete
+namespace Drawing.Bezier.Concrete
 {
     public class LibraryBezierDraw : IBezierDraw
     {
-        public IVector3Draw Vector3Draw;
+        public IVertexDraw VertexDraw;
         public ILineDraw LineDraw;
-        public LibraryBezierDraw(IVector3Draw vector3Draw, ILineDraw lineDraw)
+        public LibraryBezierDraw(IVertexDraw vertexDraw, ILineDraw lineDraw)
         {
-            Vector3Draw = vector3Draw;
+            VertexDraw = vertexDraw;
             LineDraw = lineDraw;
         }
         public void DrawBezier(BezierSufrace b, DrawingBitmapData bitmapData)
@@ -36,7 +39,7 @@ namespace Drawing.Concrete
 
             foreach (var point in b.Points)
             {
-                Vector3Draw.DrawVector3(point, bitmapData);
+                VertexDraw.DrawVertex(point, bitmapData);
             }
         }
     }

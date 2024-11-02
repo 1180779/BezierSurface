@@ -1,4 +1,9 @@
-﻿using Drawing.Concrete;
+﻿using Drawing.Basics;
+using Drawing.Basics.Concrete;
+using Drawing.Bezier;
+using Drawing.Bezier.Concrete;
+using Drawing.RotationAndTriangulation;
+using Drawing.RotationAndTriangulation.Concrete;
 using Objects.Basics;
 using Objects.Triangulation;
 using System;
@@ -11,11 +16,11 @@ namespace Drawing
 {
     public static class DrawingConfig
     {
-        static DrawingConfig() 
+        static DrawingConfig()
         {
             ILineDraw lineDraw = new LibraryLineDraw();
 
-            BezierDraw = new LibraryBezierDraw(new LibraryVector3Draw(), lineDraw);
+            BezierDraw = new LibraryBezierDraw(new LibraryVertexDraw(new LibraryVector3Draw()), lineDraw);
             TriangleDraw = new LibraryTriangleDraw(new LibraryVector3Draw(1), lineDraw);
             TriangulatedBezierDraw = new LibraryTriangulatedBezierDraw(TriangleDraw);
         }
@@ -25,9 +30,9 @@ namespace Drawing
 
         public static void DrawTriangulatedBezier(TriangulatedBezierSurface bs, DrawingBitmapData bitmapData)
             => TriangulatedBezierDraw.DrawTriangulatedBezier(bs, bitmapData);
-        public static void DrawBezier(BezierSufrace b, DrawingBitmapData bitmapData) 
+        public static void DrawBezier(BezierSufrace b, DrawingBitmapData bitmapData)
             => BezierDraw.DrawBezier(b, bitmapData);
-        public static void DrawTriangle(Triangle t, DrawingBitmapData bitmapData) 
+        public static void DrawTriangle(Triangle t, DrawingBitmapData bitmapData)
             => TriangleDraw.DrawTriangle(t, bitmapData);
     }
 }

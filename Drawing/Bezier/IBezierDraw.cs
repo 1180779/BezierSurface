@@ -1,11 +1,12 @@
-﻿using Objects.Basics;
+﻿using Drawing.Basics;
+using Objects.Basics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drawing
+namespace Drawing.Bezier
 {
     public interface IBezierDraw
     {
