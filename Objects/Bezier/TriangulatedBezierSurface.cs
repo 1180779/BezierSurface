@@ -5,34 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Objects.RotationAndTriangulation;
 
+using System.Numerics;
+
 namespace Objects.Bezier
 {
     public class TriangulatedBezierSurface : BezierSufrace
     {
-        private int _alpha;
-        public int Alpha
-        {
-            get { return _alpha; }
-            set
-            {
-                if (value == _alpha)
-                    return;
-                _alpha = value;
-                Rotation();
-            }
-        }
-        private int _beta;
-        public int Beta
-        {
-            get { return _beta; }
-            set
-            {
-                if (value == _beta)
-                    return;
-                _beta = value;
-                Rotation();
-            }
-        }
         private int _n = 0;
         public int N
         {
@@ -43,6 +21,7 @@ namespace Objects.Bezier
                     return;
                 _n = value;
                 Triangulation();
+                Rotation();
             }
         }
         public Vertex[,] TrianglePoints { get { return _points; } }
@@ -54,6 +33,8 @@ namespace Objects.Bezier
             if (n < 4)
                 throw new InvalidDataException();
             N = n;
+            Alpha = 0;
+            Beta = 0;
         }
 
         // triangulation
@@ -68,6 +49,7 @@ namespace Objects.Bezier
                     j = 0;
                     for (float v = 0f; v <= 1f + step / 2; v += step, ++j)
                     {
+                        _points[i, j] = new Vertex();
                         _points[i, j].P = P(u, v);
                     }
                 }
@@ -79,22 +61,34 @@ namespace Objects.Bezier
                 for (int j = 0; j < N; j++)
                 {
                     tempTriangles.Add(new Triangle(
-                        _points[i, j].P,
-                        _points[i, j + 1].P,
-                        _points[i + 1, j].P));
+                        _points[i, j],
+                        _points[i, j + 1],
+                        _points[i + 1, j]));
                     tempTriangles.Add(new Triangle(
-                        _points[i, j + 1].P,
-                        _points[i + 1, j].P,
-                        _points[i + 1, j + 1].P));
+                        _points[i, j + 1],
+                        _points[i + 1, j],
+                        _points[i + 1, j + 1]));
                 }
             }
 
             _triangles = [.. tempTriangles];
         }
 
-        private void Rotation()
+        protected override (Quaternion ZR, Quaternion XR) Rotation()
         {
-            // TO DO: rotate all the points
+            var (rotationZ, rotationX) = base.Rotation();
+
+            if(N <= 0)
+                return (rotationZ, rotationX);
+
+            for(int i = 0; i <= N; ++i)
+            {
+                for(int j = 0; j <= N; j++)
+                {
+                    _points[i, j].PR = Vector3.Transform(Vector3.Transform(_points[i, j].P, rotationZ), rotationX);
+                }
+            }
+            return (rotationZ, rotationX);
         }
     }
 }

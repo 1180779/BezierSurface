@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Drawing.Bezier.Concrete
 {
-    public class LibraryTriangulatedBezierDraw : ITriangulatedBezierDraw
+    public class TriangulatedBezierDraw : ITriangulatedBezierDraw
     {
         public ITriangleDraw TriangleDraw { get; set; }
-        public LibraryTriangulatedBezierDraw(ITriangleDraw triangleDraw)
+        public TriangulatedBezierDraw(ITriangleDraw triangleDraw)
         {
             TriangleDraw = triangleDraw;
         }

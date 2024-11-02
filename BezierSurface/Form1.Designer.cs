@@ -86,21 +86,22 @@
             // trackBarBeta
             // 
             trackBarBeta.Location = new Point(62, 150);
-            trackBarBeta.Minimum = 10;
+            trackBarBeta.Maximum = 720;
             trackBarBeta.Name = "trackBarBeta";
             trackBarBeta.Size = new Size(170, 56);
             trackBarBeta.TabIndex = 3;
-            trackBarBeta.Value = 10;
+            trackBarBeta.Value = 180;
             trackBarBeta.Scroll += trackBarBeta_Scroll;
             // 
             // trackBarAlpha
             // 
             trackBarAlpha.Location = new Point(62, 88);
-            trackBarAlpha.Maximum = 45;
-            trackBarAlpha.Minimum = -45;
+            trackBarAlpha.Maximum = 720;
+            trackBarAlpha.Minimum = -720;
             trackBarAlpha.Name = "trackBarAlpha";
             trackBarAlpha.Size = new Size(170, 56);
             trackBarAlpha.TabIndex = 2;
+            trackBarAlpha.Value = 180;
             trackBarAlpha.Scroll += trackBarAlpha_Scroll;
             // 
             // textBoxTrianglesN

@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Objects.RotationAndTriangulation
 {
-    public struct Vertex
+    public class Vertex
     {
         // before rotation
         public Vector3 P { get; set; } // point BEFORE rotation

@@ -1,5 +1,4 @@
 ﻿using Drawing.Basics;
-using Drawing.RotationAndTriangulation;
 using Objects.RotationAndTriangulation;
 using System;
 using System.Collections.Generic;
@@ -9,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Drawing.RotationAndTriangulation.Concrete
 {
-    public class LibraryVertexDraw : IVertexDraw
+    public class VertexDrawRotation : IVertexDraw
     {
         public IVector3Draw Vector3Draw;
-        public LibraryVertexDraw(IVector3Draw vector3Draw)
+        public VertexDrawRotation(IVector3Draw vector3Draw)
         {
             Vector3Draw = vector3Draw;
         }
         public void DrawVertex(Vertex v, DrawingBitmapData bitmapData)
         {
-            Vector3Draw.DrawVector3(v.P, bitmapData);
+            Vector3Draw.DrawVector3(v.PR, bitmapData);
         }
     }
 }

@@ -23,12 +23,15 @@ namespace BezierSurface
             _drawingData.Pen = Pens.Black;
             _drawingData.Brush = Brushes.Green;
             
-
             textBoxTrianglesN.Text = trackBarTrianglesN.Value.ToString();
-            textBoxAlpha.Text = trackBarAlpha.Value.ToString();
-            textBoxBeta.Text = trackBarBeta.Value.ToString();
+            float alphaVal = trackBarAlpha.Value / 4;
+            textBoxAlpha.Text = alphaVal.ToString();
+            float betaVal = trackBarBeta.Value / 4;
+            textBoxBeta.Text = betaVal.ToString();
 
             _surface = new(_pointsFile, trackBarTrianglesN.Value);
+            _surface.Alpha = alphaVal / 360 * 2 * (float)Math.PI;
+            _surface.Beta = betaVal / 360 * 2 * (float)Math.PI;
 
             using (Graphics g = Graphics.FromImage(canvas.Image))
             {
@@ -44,7 +47,6 @@ namespace BezierSurface
 
                 _drawingData.G = null;
             }
-
         }
 
         private void trackBarTrianglesN_Scroll(object sender, EventArgs e)
@@ -56,13 +58,17 @@ namespace BezierSurface
 
         private void trackBarAlpha_Scroll(object sender, EventArgs e)
         {
-            textBoxAlpha.Text = trackBarAlpha.Value.ToString();
+            float value = trackBarAlpha.Value / 4;
+            _surface.Alpha = value / 360 * 2 * (float) Math.PI;
+            textBoxAlpha.Text = value.ToString();
             canvas.Invalidate();
         }
 
         private void trackBarBeta_Scroll(object sender, EventArgs e)
         {
-            textBoxBeta.Text = trackBarBeta.Value.ToString();
+            float value = trackBarBeta.Value / 4;
+            _surface.Beta = value / 360 * 2 * (float)Math.PI;
+            textBoxBeta.Text = value.ToString();
             canvas.Invalidate();
         }
 

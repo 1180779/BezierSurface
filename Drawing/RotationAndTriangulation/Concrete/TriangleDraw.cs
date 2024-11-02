@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Drawing.RotationAndTriangulation.Concrete
 {
-    public class LibraryTriangleDraw : ITriangleDraw
+    public class TriangleDraw : ITriangleDraw
     {
         public ILineDraw LineDraw { get; set; }
         public IVector3Draw Vector3Draw { get; set; }
-        public LibraryTriangleDraw(IVector3Draw vector3Draw, ILineDraw lineDraw)
+        public TriangleDraw(IVector3Draw vector3Draw, ILineDraw lineDraw)
         {
             LineDraw = lineDraw;
             Vector3Draw = vector3Draw;

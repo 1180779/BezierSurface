@@ -2,6 +2,7 @@
 using Drawing.Basics.Concrete;
 using Drawing.Bezier;
 using Drawing.Bezier.Concrete;
+using Drawing.Bezier.Concrete.Drawing.Bezier.Concrete;
 using Drawing.RotationAndTriangulation;
 using Drawing.RotationAndTriangulation.Concrete;
 using Objects.Bezier;
@@ -20,9 +21,10 @@ namespace Drawing
         {
             ILineDraw lineDraw = new LibraryLineDraw();
 
-            BezierDraw = new LibraryBezierDraw(new LibraryVertexDraw(new LibraryVector3Draw()), lineDraw);
-            TriangleDraw = new LibraryTriangleDraw(new LibraryVector3Draw(1), lineDraw);
-            TriangulatedBezierDraw = new LibraryTriangulatedBezierDraw(TriangleDraw);
+            BezierDraw = new BezierDrawRotation(new VertexDrawRotation(new LibraryVector3Draw()), lineDraw);
+            //TriangleDraw = new TriangleDraw(new LibraryVector3Draw(1), lineDraw);
+            TriangleDraw = new TriangleDrawRotation(new LibraryVector3Draw(1), lineDraw);
+            TriangulatedBezierDraw = new TriangulatedBezierDraw(TriangleDraw);
         }
         public static ITriangulatedBezierDraw TriangulatedBezierDraw { get; private set; }
         public static IBezierDraw BezierDraw { get; private set; }

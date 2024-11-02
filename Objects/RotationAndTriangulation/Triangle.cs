@@ -14,6 +14,12 @@ namespace Objects.RotationAndTriangulation
         public Vertex B = new();
         public Vertex C = new();
         public Triangle() { }
+        public Triangle(Vertex a, Vertex b, Vertex c)
+        {
+            A = a;
+            B = b;
+            C = c;
+        }
         public Triangle(Vector3 a, Vector3 b, Vector3 c)
         {
             A.P = a;

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Drawing.Bezier.Concrete
 {
-    public class LibraryBezierDraw : IBezierDraw
+    public class BezierDraw : IBezierDraw
     {
         public IVertexDraw VertexDraw;
         public ILineDraw LineDraw;
-        public LibraryBezierDraw(IVertexDraw vertexDraw, ILineDraw lineDraw)
+        public BezierDraw(IVertexDraw vertexDraw, ILineDraw lineDraw)
         {
             VertexDraw = vertexDraw;
             LineDraw = lineDraw;
@@ -25,7 +25,7 @@ namespace Drawing.Bezier.Concrete
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    LineDraw.DrawLine(b[i, j], b[i + 1, j], bitmapData);
+                    LineDraw.DrawLine(b[i, j].P, b[i + 1, j].P, bitmapData);
                 }
             }
 
@@ -33,7 +33,7 @@ namespace Drawing.Bezier.Concrete
             {
                 for (int j = 0; j < 4 - 1; j++)
                 {
-                    LineDraw.DrawLine(b[i, j], b[i, j + 1], bitmapData);
+                    LineDraw.DrawLine(b[i, j].P, b[i, j + 1].P, bitmapData);
                 }
             }
 

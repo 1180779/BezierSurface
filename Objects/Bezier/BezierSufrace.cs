@@ -22,6 +22,31 @@ namespace Objects.Bezier
             BTransposed = Matrix4x4.Transpose(B);
         }
 
+        protected float _alpha = -1;
+        public float Alpha
+        {
+            get { return _alpha; }
+            set
+            {
+                if (value == _alpha)
+                    return;
+                _alpha = value;
+                Rotation();
+            }
+        }
+        protected float _beta = 0;
+        public float Beta
+        {
+            get { return _beta; }
+            set
+            {
+                if (value == _beta)
+                    return;
+                _beta = value;
+                Rotation();
+            }
+        }
+
         public Vector3Matrix4x4 V { get { return _V; } }
         private Vector3Matrix4x4 _V;
         public Vertex[,] Points { get { return _v; } }
@@ -38,11 +63,13 @@ namespace Objects.Bezier
                     var line = stream.ReadLine() ?? throw new InvalidDataException();
                     Vector3 vec = new();
                     vec.ReadFromLine(line);
+                    _v[i, j] = new Vertex();
                     _v[i, j].P = vec;
                 }
             }
             stream.Close();
             _V = new Vector3Matrix4x4(_v);
+            Alpha = 0;
         }
 
         public Vertex this[int i, int j]
@@ -85,6 +112,21 @@ namespace Objects.Bezier
             Vector4 uV = new(3 * u * u, 2 * u, 1, 0);
             Vector4 vV = new(v * v * v, v * v, v, 1);
             return Vector4.Transform(uV, B).Transform(V).Transform(BTransposed).Dot(vV);
+        }
+
+        protected virtual (Quaternion ZR, Quaternion XR) Rotation()
+        {
+            var rotationZ = Quaternion.CreateFromAxisAngle(Vector3.UnitZ, _alpha);
+            var rotationX = Quaternion.CreateFromAxisAngle(Vector3.UnitX, _beta);
+
+            for (int i = 0; i < 4; ++i)
+            {
+                for(int j = 0; j < 4; ++j)
+                {
+                    _v[i, j].PR = Vector3.Transform(Vector3.Transform(_v[i, j].P, rotationZ), rotationX);
+                }
+            }
+            return (rotationZ, rotationX);
         }
     }
 }
