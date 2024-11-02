@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BezierSurface", "BezierSurface\BezierSurface.csproj", "{001F1F23-DBDC-4129-B67E-F7E3103D42E9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Objects", "Objects\Objects.csproj", "{9A96451B-FAEA-4C9B-80E3-91505073DCC5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drawing", "Drawing\Drawing.csproj", "{B0DAACEE-4C18-426F-9A86-A6E9F7FBE689}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointsFileGenerator", "PointsFileGenerator\PointsFileGenerator.csproj", "{BF9C784A-4B2F-4D90-96A2-6D84F0E63802}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{001F1F23-DBDC-4129-B67E-F7E3103D42E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{001F1F23-DBDC-4129-B67E-F7E3103D42E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{001F1F23-DBDC-4129-B67E-F7E3103D42E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{001F1F23-DBDC-4129-B67E-F7E3103D42E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A96451B-FAEA-4C9B-80E3-91505073DCC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A96451B-FAEA-4C9B-80E3-91505073DCC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A96451B-FAEA-4C9B-80E3-91505073DCC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A96451B-FAEA-4C9B-80E3-91505073DCC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0DAACEE-4C18-426F-9A86-A6E9F7FBE689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0DAACEE-4C18-426F-9A86-A6E9F7FBE689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0DAACEE-4C18-426F-9A86-A6E9F7FBE689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0DAACEE-4C18-426F-9A86-A6E9F7FBE689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF9C784A-4B2F-4D90-96A2-6D84F0E63802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF9C784A-4B2F-4D90-96A2-6D84F0E63802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF9C784A-4B2F-4D90-96A2-6D84F0E63802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF9C784A-4B2F-4D90-96A2-6D84F0E63802}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ADF337D3-D298-4893-83F3-AACA287ED2B5}
+	EndGlobalSection
+EndGlobal
