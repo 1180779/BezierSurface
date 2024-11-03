@@ -6,25 +6,33 @@ using System.Threading.Tasks;
 
 using System.Numerics;
 
+using Objects.Lightning;
+
+using System.Numerics;
+
 namespace Objects.RotationAndTriangulation
 {
-    public class Triangle
+    public class Triangle : IPolygon
     {
-        public Vertex A = new();
-        public Vertex B = new();
-        public Vertex C = new();
-        public Triangle() { }
+        public Vertex A { get; private set; }
+        public Vertex B { get; private set; }
+        public Vertex C { get; private set; }
+        public Edge[] Edges { get; private set; }
+        public Vertex[] Vertices { get; private set; }
         public Triangle(Vertex a, Vertex b, Vertex c)
         {
             A = a;
             B = b;
             C = c;
-        }
-        public Triangle(Vector3 a, Vector3 b, Vector3 c)
-        {
-            A.P = a;
-            B.P = b;
-            C.P = c;
+            Edges = new Edge[3];
+            Edges[0] = new Edge(A, B);
+            Edges[1] = new Edge(A, C);
+            Edges[2] = new Edge(B, C);
+
+            Vertices = new Vertex[3];
+            Vertices[0] = A;
+            Vertices[1] = B;
+            Vertices[2] = C;
         }
 
     }

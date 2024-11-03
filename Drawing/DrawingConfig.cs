@@ -13,6 +13,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Numerics;
+using Drawing.Lightning;
+using Drawing.Lightning.Concrete;
+using Drawing.Filling.Concrete;
+
 namespace Drawing
 {
     public static class DrawingConfig
@@ -21,11 +26,22 @@ namespace Drawing
         {
             ILineDraw lineDraw = new LibraryLineDraw();
 
-            BezierDraw = new BezierDrawRotation(new VertexDrawRotation(new LibraryVector3Draw()), lineDraw);
+            LightSource = new LightSource(new Vector3(-800, -800, 0));
+
+            BezierDraw = new BezierDrawRotation(
+                new VertexDrawRotation(new LibraryVector3Draw()), 
+                lineDraw);
+
             //TriangleDraw = new TriangleDraw(new LibraryVector3Draw(1), lineDraw);
-            TriangleDraw = new TriangleDrawRotation(new LibraryVector3Draw(1), lineDraw);
-            TriangulatedBezierDraw = new TriangulatedBezierDraw(TriangleDraw);
+            TriangleDraw = new TriangleDrawRotation(
+                new LibraryVector3Draw(1), 
+                lineDraw);
+
+            TriangulatedBezierDraw = new TriangulatedBezierDrawLit(
+                TriangleDraw, 
+                new BucketPolygonFill(new LibraryLineDraw()));
         }
+        public static ILightSource LightSource { get; private set; }
         public static ITriangulatedBezierDraw TriangulatedBezierDraw { get; private set; }
         public static IBezierDraw BezierDraw { get; private set; }
         public static ITriangleDraw TriangleDraw { get; private set; }

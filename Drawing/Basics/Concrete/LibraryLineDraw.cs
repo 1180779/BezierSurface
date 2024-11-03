@@ -14,5 +14,10 @@ namespace Drawing.Basics.Concrete
         {
             bitmapData.G!.DrawLine(bitmapData.Pen!, new Point((int)P1.X, (int)P1.Y), new Point((int)P2.X, (int)P2.Y));
         }
+
+        public void DrawLine(Point P1, Point P2, DrawingBitmapData bitmapData)
+        {
+            bitmapData.G!.DrawLine(bitmapData.Pen!, P1, P2);
+        }
     }
 }

@@ -11,8 +11,8 @@ namespace Objects.Bezier
 {
     public class TriangulatedBezierSurface : BezierSufrace
     {
-        private int _n = 0;
-        public int N
+        protected int _n = 0;
+        public virtual int N
         {
             get { return _n; }
             set
@@ -25,8 +25,8 @@ namespace Objects.Bezier
             }
         }
         public Vertex[,] TrianglePoints { get { return _points; } }
-        private Vertex[,] _points = new Vertex[0, 0];
-        private Triangle[] _triangles = [];
+        protected Vertex[,] _points = new Vertex[0, 0];
+        protected Triangle[] _triangles = [];
         public Triangle[] Triangles { get { return _triangles; } }
         public TriangulatedBezierSurface(string file, int n) : base(file)
         {
@@ -38,7 +38,7 @@ namespace Objects.Bezier
         }
 
         // triangulation
-        private void Triangulation()
+        protected void Triangulation()
         {
             _points = new Vertex[N + 1, N + 1];
             float step = 1f / N;
