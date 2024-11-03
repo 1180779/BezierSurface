@@ -1,5 +1,4 @@
-﻿using Drawing.Basics;
-using Objects.RotationAndTriangulation;
+﻿using Objects.RotationAndTriangulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -51,6 +51,9 @@ namespace Objects.Bezier
                     {
                         _points[i, j] = new Vertex();
                         _points[i, j].P = P(u, v);
+                        _points[i, j].Pu = Pu(u, v);
+                        _points[i, j].Pv = Pv(u, v);
+                        _points[i, j].N = Vector3.Cross(_points[i, j].Pu, _points[i, j].Pv);
                     }
                 }
             }
@@ -86,6 +89,7 @@ namespace Objects.Bezier
                 for(int j = 0; j <= N; j++)
                 {
                     _points[i, j].PR = Vector3.Transform(Vector3.Transform(_points[i, j].P, rotationZ), rotationX);
+                    _points[i, j].NR = Vector3.Transform(Vector3.Transform(_points[i, j].N, rotationZ), rotationX);
                 }
             }
             return (rotationZ, rotationX);

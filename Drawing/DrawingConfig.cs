@@ -32,14 +32,13 @@ namespace Drawing
                 new VertexDrawRotation(new LibraryVector3Draw()), 
                 lineDraw);
 
-            //TriangleDraw = new TriangleDraw(new LibraryVector3Draw(1), lineDraw);
             TriangleDraw = new TriangleDrawRotation(
                 new LibraryVector3Draw(1), 
                 lineDraw);
 
             TriangulatedBezierDraw = new TriangulatedBezierDrawLit(
                 TriangleDraw, 
-                new BucketPolygonFill(new LibraryLineDraw()));
+                new BucketPolygonFill(new ScanDraw(new PixelColor())));
         }
         public static ILightSource LightSource { get; private set; }
         public static ITriangulatedBezierDraw TriangulatedBezierDraw { get; private set; }

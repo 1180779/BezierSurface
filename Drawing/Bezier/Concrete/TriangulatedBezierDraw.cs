@@ -1,5 +1,4 @@
-﻿using Drawing.Basics;
-using Drawing.Bezier;
+﻿using Drawing.Bezier;
 using Drawing.RotationAndTriangulation;
 using Objects.Bezier;
 using System;

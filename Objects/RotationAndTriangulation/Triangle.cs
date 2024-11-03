@@ -35,5 +35,17 @@ namespace Objects.RotationAndTriangulation
             Vertices[2] = C;
         }
 
+
+        public static float Area2DXYTimes2(Vector3 X, Vector3 Y, Vector3 Z)
+        {
+            return Math.Abs(X.X * (Y.Y - Z.Y) + Y.X * (Z.Y - X.Y) + Z.X * (X.Y - Y.Y));
+        }
+        public static float Area2DXY(Vector3 X, Vector3 Y, Vector3 Z) => Area2DXYTimes2(X, Y, Z) / 2;
+
+        public static float AreaTimes2(Vector2 X, Vector2 Y, Vector2 Z)
+        {
+            return Math.Abs(X.X * (Y.Y - Z.Y) + Y.X * (Z.Y - X.Y) + Z.X * (X.Y - Y.Y));
+        }
+        public static float Area(Vector2 X, Vector2 Y, Vector2 Z) => AreaTimes2(X, Y, Z) / 2;
     }
 }

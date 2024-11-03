@@ -1,5 +1,4 @@
-﻿using Drawing.Basics;
-using Drawing.Bezier;
+﻿using Drawing.Bezier;
 using Drawing.Filling;
 using Drawing.RotationAndTriangulation;
 using Objects.Bezier;
@@ -27,18 +26,24 @@ namespace Drawing.Bezier.Concrete
             foreach (var triangle in bs.Triangles)
             {
                 TriangleDraw.DrawTriangle(triangle, bitmapData);
-                //PolygonFill.FillPolygon(triangle, bitmapData);
+                PolygonFill.FillPolygon(triangle, bitmapData);
             }
+             
+
+            // for debugging puropses
+
             //Vertex B = new Vertex();
             //B.PR = new System.Numerics.Vector3(-100, 0, 513);
             //Vertex C = new Vertex();
             //C.PR = new System.Numerics.Vector3(0, 100, 111);
             //Triangle MockTriangle = new Triangle(new Vertex(), B, C);
             //PolygonFill.FillPolygon(MockTriangle, bitmapData);
+            
 
             //Triangle t = bs.Triangles[0];
-            Triangle t = new Triangle(bs.Points[1, 1], bs.Points[2, 1], bs.Points[2, 2]);
-            PolygonFill.FillPolygon(t, bitmapData);
+
+            //Triangle t = new Triangle(bs.Points[1, 1], bs.Points[2, 1], bs.Points[2, 2]);
+            //PolygonFill.FillPolygon(t, bitmapData);
         }
     }
 }

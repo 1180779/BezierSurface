@@ -15,7 +15,10 @@ namespace Drawing.Filling
         {
             if(x is null || y is null) 
                 return 0;
-            return (int)(x.YMinR - y.YMinR);
+            float val = x.YMinR - y.YMinR;
+            if (val < 0f) return -1;
+            if (val > 0f) return 1;
+            return 0;
         }
     }
 }

@@ -1,7 +1,6 @@
 using System.Drawing;
 
 using Drawing;
-using Drawing.Basics;
 using Objects.Bezier;
 
 namespace BezierSurface
@@ -19,7 +18,7 @@ namespace BezierSurface
             _dbitmap = new DirectBitmap(canvas.Width, canvas.Height);
             canvas.Image = _dbitmap.Bitmap;
 
-            _drawingData = new(_dbitmap);
+            _drawingData = new(_dbitmap, canvas.Width / 2, canvas.Height / 2);
             _drawingData.Pen = Pens.Black;
             _drawingData.Brush = Brushes.Green;
             

@@ -1,5 +1,6 @@
 ﻿using Drawing.Basics;
 using Objects.Lightning;
+using Objects.RotationAndTriangulation;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
@@ -15,23 +16,28 @@ namespace Drawing.Filling.Concrete
     {
         private EdgeTable ET;
         private EdgeList AET;
-        public ILineDraw LineDraw { get; set; }
-        public BucketPolygonFill(ILineDraw lineDraw)
+        //public ILineDraw LineDraw { get; set; }
+        public IScanDraw ScanDraw {  get; set; }
+        public BucketPolygonFill(IScanDraw scanDraw)
         {
-            LineDraw = lineDraw;
+            ScanDraw = scanDraw;
         }
-        public void FillPolygonLibrary(IPolygon p, DrawingBitmapData bitmapData)
-        {
-            Point[] points = new Point[3];
-            points[0] = new Point((int)p.Vertices[0].PR.X, (int)p.Vertices[0].PR.Y);
-            points[1] = new Point((int)p.Vertices[1].PR.X, (int)p.Vertices[1].PR.Y);
-            points[2] = new Point((int)p.Vertices[2].PR.X, (int)p.Vertices[2].PR.Y);
-            bitmapData.G.FillPolygon(bitmapData.Brush, points);
-        }
-        public void FillPolygon(IPolygon p, DrawingBitmapData bitmapData)
+        //public BucketPolygonFill(ILineDraw lineDraw)
+        //{
+        //    LineDraw = lineDraw;
+        //}
+        //public void FillPolygonLibrary(IPolygon p, DrawingBitmapData bitmapData)
+        //{
+        //    Point[] points = new Point[3];
+        //    points[0] = new Point((int)p.Vertices[0].PR.X, (int)p.Vertices[0].PR.Y);
+        //    points[1] = new Point((int)p.Vertices[1].PR.X, (int)p.Vertices[1].PR.Y);
+        //    points[2] = new Point((int)p.Vertices[2].PR.X, (int)p.Vertices[2].PR.Y);
+        //    bitmapData.G.FillPolygon(bitmapData.Brush, points);
+        //}
+        public void FillPolygon(Triangle t, DrawingBitmapData bitmapData)
         {
             ET = new EdgeTable(bitmapData.DBitmap.Height);
-            ET.Fill(p);
+            ET.Fill(t);
             // ustaw AETjako pusta lista
             AET = new EdgeList();
 
@@ -59,22 +65,31 @@ namespace Drawing.Filling.Concrete
                 { }
                 else if(AET.Edges.Count == 3)
                 {
-                    LineDraw.DrawLine(
-                        new Point((int)AET.Edges[0].X, i),
-                        new Point((int)AET.Edges[2].X, i),
+                    ScanDraw.DrawScan(
+                        (int)AET.Edges[0].X,
+                        (int)AET.Edges[2].X,
+                        i,
+                        t,
                         bitmapData);
+                    //LineDraw.DrawLine(
+                    //    new Point((int)AET.Edges[0].X, i),
+                    //    new Point((int)AET.Edges[2].X, i),
+                    //    bitmapData);
                 }
                 else
                 {
                     for(int j = 0; j < AET.Edges.Count; j += 2)
                     {
-                        LineDraw.DrawLine(
-                            new Point((int)AET.Edges[j].X, i),
-                            new Point((int)AET.Edges[j + 1].X, i),
-                            bitmapData);
-                        //bitmapData.G.DrawLine(Pens.AliceBlue,
+                        ScanDraw.DrawScan(
+                        (int)AET.Edges[j].X,
+                        (int)AET.Edges[j + 1].X,
+                        i,
+                        t,
+                        bitmapData);
+                        //LineDraw.DrawLine(
                         //    new Point((int)AET.Edges[j].X, i),
-                        //    new Point((int)AET.Edges[j + 1].X, i));
+                        //    new Point((int)AET.Edges[j + 1].X, i),
+                        //    bitmapData);
                     }
                 }
 

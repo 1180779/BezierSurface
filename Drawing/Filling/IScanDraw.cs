@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Objects.Lightning;
-
 namespace Drawing.Filling
 {
-    public interface IPolygonFill
+    public interface IScanDraw
     {
-        public void FillPolygon(Triangle p, DrawingBitmapData bitmapData);
+        public void DrawScan(int X1, int X2, int y, Triangle t, DrawingBitmapData bitmapData);
     }
 }
