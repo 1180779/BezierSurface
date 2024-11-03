@@ -13,37 +13,27 @@ namespace Drawing.Lightning.Concrete
         public void ColorPixel(Point p, Triangle t, DrawingData bitmapData)
         {
             var lambda = BarycentricCoordinatesCalculator.GetBarycentric(p, t);
-            
             Vector3 pApprox = lambda.X * t.A.PR + lambda.Y * t.B.PR + lambda.Z * t.C.PR;
             Vector3 N = Vector3.Normalize(lambda.X * t.A.NR + lambda.Y * t.B.NR + lambda.Z * t.C.NR);
             Vector3 L = Vector3.Normalize(bitmapData.LightS.Location - pApprox);
-            Vector3 V = Vector3.UnitZ;
-            Vector3 R = Vector3.Normalize(2 * Vector3.Dot(N, L) * N - L);
-
-            Vector3 objectColor = new Vector3(0, 1, 0);
             float cosNL = Vector3.Dot(N, L);
+            Vector3 R = Vector3.Normalize(2 * cosNL * N - L);
+
             if (cosNL < 0f)
                 cosNL = 0f;
-            float cosVR = Vector3.Dot(V, R);
-            if(cosVR < 0)
+            float cosVR = Vector3.Dot(Vector3.UnitZ, R);
+            if (cosVR < 0)
                 cosVR = 0;
             // TO DO:
             // add colors to triangles
-            float A = bitmapData.LightSParams.kd * cosNL;
-            float B = bitmapData.LightSParams.ks * (float)Math.Pow(cosVR, bitmapData.LightSParams.m);
-            float colorR =  A * bitmapData.LightS.Color0To1.X * objectColor.X
-                + B * bitmapData.LightS.Color0To1.X * objectColor.X;
-            float colorG = A * bitmapData.LightS.Color0To1.Y * objectColor.Y
-                + B * bitmapData.LightS.Color0To1.Y * objectColor.Y;
-            float colorB = A * bitmapData.LightS.Color0To1.Z * objectColor.Z
-                + B * bitmapData.LightS.Color0To1.Z * objectColor.Z;
-            if (colorR > 1f)
-                colorR = 1f;
-            if(colorG > 1f)
-                colorG = 1f;
-            if (colorB < 0f)
-                colorB = 0f;
-            Color c = Color.FromArgb((int)(colorR * 255), (int)(colorG * 255), (int)(colorB * 255));
+            Vector3 color = bitmapData.PartialLightComputations.A * cosNL +
+                bitmapData.PartialLightComputations.B * (float)Math.Pow(cosVR, bitmapData.LightSParams.m);
+            for (int i = 0; i < 3; ++i)
+            {
+                if (color[i] > 1f)
+                    color[i] = 1f;
+            }
+            Color c = Color.FromArgb((int)(color[0] * 255), (int)(color[1] * 255), (int)(color[2] * 255));
 
             // TO DO:
             // change to set pixel

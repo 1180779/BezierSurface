@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Drawing.Lightning.Concrete
 {
-    public class LightSource : ILightSource
+    public struct LightSource : ILightSource
     {
         private Color _color;
         private Vector3 _color0To1;

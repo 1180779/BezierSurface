@@ -44,16 +44,20 @@ namespace BezierSurface
             _drawingData.Brush = Brushes.Green;
 
             textBoxTrianglesN.Text = trackBarTrianglesN.Value.ToString();
-            float alphaVal = trackBarAlpha.Value / 4;
+            float alphaVal = (float)trackBarAlpha.Value / 4;
             textBoxAlpha.Text = alphaVal.ToString();
-            float betaVal = trackBarBeta.Value / 4;
+            float betaVal = (float)trackBarBeta.Value / 4;
             textBoxBeta.Text = betaVal.ToString();
+
+            textBoxKD.Text = ((float)trackBarKD.Value / 100).ToString();
+            textBoxKS.Text = ((float)trackBarKS.Value / 100).ToString();
+            textBoxM.Text = trackBarM.Value.ToString();
 
             _surface = new(_pointsFile, trackBarTrianglesN.Value);
             _surface.Alpha = alphaVal / 360 * 2 * (float)Math.PI;
             _surface.Beta = betaVal / 360 * 2 * (float)Math.PI;
 
-            using (Graphics g = Graphics.FromImage(canvas.Image))
+            using (Graphics g = Graphics.FromImage(_dbitmap.Bitmap))
             {
                 _drawingData.G = g;
 
@@ -62,12 +66,12 @@ namespace BezierSurface
 
                 g.Clear(Color.White);
 
-                if (DrawingSelection.Controls)
-                    DrawingObject.DrawBezier(_surface, _drawingData);
-                if (DrawingSelection.Triangles)
-                    DrawingObject.DrawTriangulatedBezier(_surface, _drawingData);
                 if (DrawingSelection.Surface)
                     DrawingObject.DrawSurface(_surface, _drawingData);
+                if (DrawingSelection.Triangles)
+                    DrawingObject.DrawTriangulatedBezier(_surface, _drawingData);
+                if (DrawingSelection.Controls)
+                    DrawingObject.DrawBezier(_surface, _drawingData);
 
                 _drawingData.G = null;
             }
@@ -75,20 +79,24 @@ namespace BezierSurface
 
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
-            using Graphics g = Graphics.FromImage(_dbitmap.Bitmap);
-            g.ScaleTransform(1, -1);
-            g.TranslateTransform(canvas.Width / 2, -canvas.Height / 2);
-            _drawingData.G = g;
+            using (Graphics g = Graphics.FromImage(_dbitmap.Bitmap))
+            {
+                g.ScaleTransform(1, -1);
+                g.TranslateTransform(canvas.Width / 2, -canvas.Height / 2);
+                _drawingData.G = g;
 
-            g.Clear(Color.White);
-            if (DrawingSelection.Controls)
-                DrawingObject.DrawBezier(_surface, _drawingData);
-            if (DrawingSelection.Triangles)
-                DrawingObject.DrawTriangulatedBezier(_surface, _drawingData);
-            if (DrawingSelection.Surface)
-                DrawingObject.DrawSurface(_surface, _drawingData);
+                g.Clear(Color.White);
+                
+                if (DrawingSelection.Surface)
+                    DrawingObject.DrawSurface(_surface, _drawingData);
+                if (DrawingSelection.Triangles)
+                    DrawingObject.DrawTriangulatedBezier(_surface, _drawingData);
+                if (DrawingSelection.Controls)
+                    DrawingObject.DrawBezier(_surface, _drawingData);
 
-            _drawingData.G = null;
+                _drawingData.G = null;
+            }
+            canvas.Image = _dbitmap.Bitmap;
         }
 
         private void trackBarTrianglesN_Scroll(object sender, EventArgs e)
@@ -119,6 +127,7 @@ namespace BezierSurface
             float value = (float)trackBarKD.Value / 100;
             _drawingData.LightSParams.kd = value;
             textBoxKD.Text = value.ToString();
+            _drawingData.RecalculatePartialLightComputations();
             canvas.Invalidate();
         }
 
@@ -126,6 +135,7 @@ namespace BezierSurface
         {
             float value = (float)trackBarKS.Value / 100;
             _drawingData.LightSParams.ks = value;
+            _drawingData.RecalculatePartialLightComputations();
             textBoxKS.Text = value.ToString();
             canvas.Invalidate();
         }
@@ -134,6 +144,7 @@ namespace BezierSurface
         {
             float value = trackBarM.Value;
             _drawingData.LightSParams.m = value;
+            _drawingData.RecalculatePartialLightComputations();
             textBoxM.Text = value.ToString();
             canvas.Invalidate();
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Drawing.Lightning
 {
-    public class LightParameters
+    public struct LightParameters
     {
         public float kd {  get; set; }
         public float ks { get; set; }

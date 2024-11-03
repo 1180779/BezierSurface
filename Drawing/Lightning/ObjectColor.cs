@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Drawing.Lightning
 {
-    public class ObjectColor
+    public struct ObjectColor
     {
-        private Color _color = Color.Green;
+        private Color _color = Color.Purple;
         public Color Color 
         {
             get { return _color; }
@@ -22,7 +22,10 @@ namespace Drawing.Lightning
             }
         }
         public Vector3 Color0To1 { get; private set; }
-        public ObjectColor() { }
+        public ObjectColor() 
+        {
+            Color = Color.FromArgb(0, 255, 0);
+        }
         public ObjectColor(Color c)
         {
             Color = c;
