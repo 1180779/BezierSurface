@@ -20,7 +20,7 @@ namespace Drawing.Bezier.Concrete
                 VertexDraw = vertexDraw;
                 LineDraw = lineDraw;
             }
-            public void DrawBezier(BezierSufrace b, DrawingBitmapData bitmapData)
+            public void DrawBezier(BezierSufrace b, DrawingData bitmapData)
             {
                 for (int i = 0; i < 4 - 1; ++i)
                 {

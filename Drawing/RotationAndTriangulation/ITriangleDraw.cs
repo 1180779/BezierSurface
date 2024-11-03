@@ -9,6 +9,6 @@ namespace Drawing.RotationAndTriangulation
 {
     public interface ITriangleDraw
     {
-        public void DrawTriangle(Triangle t, DrawingBitmapData bitmapData);
+        public void DrawTriangle(Triangle t, DrawingData bitmapData);
     }
 }

@@ -13,7 +13,7 @@ namespace Drawing.Filling.Concrete
     {
         public ScanDrawMock() { }
         public ScanDrawMock(IPixelColor pixelColor) { }
-        public void DrawScan(int X1, int X2, int y, Triangle t, DrawingBitmapData bitmapData)
+        public void DrawScan(int X1, int X2, int y, Triangle t, DrawingData bitmapData)
         {
             bitmapData.G.DrawLine(Pens.Green, new Point(X1, y), new Point(X2, y));
         }

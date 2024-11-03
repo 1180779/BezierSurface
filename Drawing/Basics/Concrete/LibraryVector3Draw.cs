@@ -15,7 +15,7 @@ namespace Drawing.Basics.Concrete
             Radius = radius;
         }
 
-        public void DrawVector3(Vector3 v, DrawingBitmapData bitmapData)
+        public void DrawVector3(Vector3 v, DrawingData bitmapData)
         {
             bitmapData.G!.FillEllipse(bitmapData.Brush!,
                 new Rectangle((int)(v.X - Radius), (int)(v.Y - Radius), 2 * Radius, 2 * Radius));

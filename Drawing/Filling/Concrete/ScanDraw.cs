@@ -17,7 +17,7 @@ namespace Drawing.Filling.Concrete
         {
             PixelColor = pixelColor;
         }
-        public void DrawScan(int X1, int X2, int y, Triangle t, DrawingBitmapData bitmapData)
+        public void DrawScan(int X1, int X2, int y, Triangle t, DrawingData bitmapData)
         {
             Point p = new Point();
             if (X2 < X1)

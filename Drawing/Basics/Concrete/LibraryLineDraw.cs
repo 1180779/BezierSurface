@@ -10,12 +10,12 @@ namespace Drawing.Basics.Concrete
 {
     public class LibraryLineDraw : ILineDraw
     {
-        public void DrawLine(Vector3 P1, Vector3 P2, DrawingBitmapData bitmapData)
+        public void DrawLine(Vector3 P1, Vector3 P2, DrawingData bitmapData)
         {
             bitmapData.G!.DrawLine(bitmapData.Pen!, new Point((int)P1.X, (int)P1.Y), new Point((int)P2.X, (int)P2.Y));
         }
 
-        public void DrawLine(Point P1, Point P2, DrawingBitmapData bitmapData)
+        public void DrawLine(Point P1, Point P2, DrawingData bitmapData)
         {
             bitmapData.G!.DrawLine(bitmapData.Pen!, P1, P2);
         }

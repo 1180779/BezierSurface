@@ -10,15 +10,16 @@ using System.Numerics;
 
 namespace Drawing
 {
-    public class DrawingBitmapData
+    public class DrawingData
     {
-        public DrawingBitmapData(DirectBitmap dbitmap, int adjX, int adjY)
+        public DrawingData(DirectBitmap dbitmap, int adjX, int adjY)
         {
             DBitmap = dbitmap;
-            LightParams = new LightParameters();
+            LightSParams = new LightParameters();
             AdjX = adjX;
             AdjY = adjY;
-            LightS = new LightSource(new Vector3(1000, 1000, 1000), Color.White);
+            LightS = new LightSource(new Vector3(-100, -1000, 0), Color.White);
+            SurfaceColor = new ObjectColor();
         }
         public int AdjX { get; set; }
         public int AdjY { get; set; }
@@ -26,7 +27,8 @@ namespace Drawing
         public Graphics? G { get; set; }
         public Pen? Pen { get; set; }
         public Brush? Brush { get; set; }
-        public LightParameters LightParams {  get; set; }
+        public ObjectColor SurfaceColor { get; set; }
+        public LightParameters LightSParams {  get; set; }
         public ILightSource LightS { get; set; }
     }
 }

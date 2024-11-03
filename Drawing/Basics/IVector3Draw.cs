@@ -11,6 +11,6 @@ namespace Drawing.Basics
     public interface IVector3Draw
     {
         public int Radius { get; set; }
-        public void DrawVector3(Vector3 v, DrawingBitmapData bitmapData);
+        public void DrawVector3(Vector3 v, DrawingData bitmapData);
     }
 }

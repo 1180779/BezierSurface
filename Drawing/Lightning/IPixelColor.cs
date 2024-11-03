@@ -10,6 +10,6 @@ namespace Drawing.Lightning
 {
     public interface IPixelColor
     {
-        public void ColorPixel(Point p, Triangle t, DrawingBitmapData bitmapData);
+        public void ColorPixel(Point p, Triangle t, DrawingData bitmapData);
     }
 }

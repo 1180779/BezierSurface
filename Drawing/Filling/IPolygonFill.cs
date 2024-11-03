@@ -11,6 +11,6 @@ namespace Drawing.Filling
 {
     public interface IPolygonFill
     {
-        public void FillPolygon(Triangle p, DrawingBitmapData bitmapData);
+        public void FillPolygon(Triangle p, DrawingData bitmapData);
     }
 }

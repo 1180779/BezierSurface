@@ -20,9 +20,9 @@ using Drawing.Filling.Concrete;
 
 namespace Drawing
 {
-    public static class DrawingConfig
+    public static class DrawingObject
     {
-        static DrawingConfig()
+        static DrawingObject()
         {
             ILineDraw lineDraw = new LibraryLineDraw();
 
@@ -36,20 +36,25 @@ namespace Drawing
                 new LibraryVector3Draw(1), 
                 lineDraw);
 
-            TriangulatedBezierDraw = new TriangulatedBezierDrawLit(
-                TriangleDraw, 
+            SUrfaceTrianglesDraw = new TriangulatedBezierDraw(
+                TriangleDraw);
+
+            SurfaceDraw = new TriangulatedBezierDrawLit(
                 new BucketPolygonFill(new ScanDraw(new PixelColor())));
         }
         public static ILightSource LightSource { get; private set; }
-        public static ITriangulatedBezierDraw TriangulatedBezierDraw { get; private set; }
+        public static  ITriangulatedBezierDraw SurfaceDraw { get; private set; }
+        public static ITriangulatedBezierDraw SUrfaceTrianglesDraw { get; private set; }
         public static IBezierDraw BezierDraw { get; private set; }
         public static ITriangleDraw TriangleDraw { get; private set; }
 
-        public static void DrawTriangulatedBezier(TriangulatedBezierSurface bs, DrawingBitmapData bitmapData)
-            => TriangulatedBezierDraw.DrawTriangulatedBezier(bs, bitmapData);
-        public static void DrawBezier(BezierSufrace b, DrawingBitmapData bitmapData)
+        public static void DrawSurface(TriangulatedBezierSurface bs, DrawingData bitmapData) 
+            => SurfaceDraw.Draw(bs, bitmapData);
+        public static void DrawTriangulatedBezier(TriangulatedBezierSurface bs, DrawingData bitmapData)
+            => SUrfaceTrianglesDraw.Draw(bs, bitmapData);
+        public static void DrawBezier(BezierSufrace b, DrawingData bitmapData)
             => BezierDraw.DrawBezier(b, bitmapData);
-        public static void DrawTriangle(Triangle t, DrawingBitmapData bitmapData)
+        public static void DrawTriangle(Triangle t, DrawingData bitmapData)
             => TriangleDraw.DrawTriangle(t, bitmapData);
     }
 }

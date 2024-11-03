@@ -10,7 +10,7 @@ namespace Drawing.Lightning.Concrete
 {
     public class PixelColorMock : IPixelColor
     {
-        public void ColorPixel(Point p, Triangle t, DrawingBitmapData bitmapData)
+        public void ColorPixel(Point p, Triangle t, DrawingData bitmapData)
         {
             using Brush b = new SolidBrush(Color.Green);
             bitmapData.G.FillRectangle(b, new Rectangle(p.X, p.Y, 1, 1));

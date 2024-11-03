@@ -34,7 +34,7 @@ namespace Drawing.Filling.Concrete
         //    points[2] = new Point((int)p.Vertices[2].PR.X, (int)p.Vertices[2].PR.Y);
         //    bitmapData.G.FillPolygon(bitmapData.Brush, points);
         //}
-        public void FillPolygon(Triangle t, DrawingBitmapData bitmapData)
+        public void FillPolygon(Triangle t, DrawingData bitmapData)
         {
             ET = new EdgeTable(bitmapData.DBitmap.Height);
             ET.Fill(t);

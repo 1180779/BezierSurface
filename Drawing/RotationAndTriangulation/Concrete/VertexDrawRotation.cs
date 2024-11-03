@@ -15,7 +15,7 @@ namespace Drawing.RotationAndTriangulation.Concrete
         {
             Vector3Draw = vector3Draw;
         }
-        public void DrawVertex(Vertex v, DrawingBitmapData bitmapData)
+        public void DrawVertex(Vertex v, DrawingData bitmapData)
         {
             Vector3Draw.DrawVector3(v.PR, bitmapData);
         }

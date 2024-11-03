@@ -9,6 +9,6 @@ namespace Drawing.RotationAndTriangulation
 {
     public interface IVertexDraw
     {
-        public void DrawVertex(Vertex v, DrawingBitmapData bitmapData);
+        public void DrawVertex(Vertex v, DrawingData bitmapData);
     }
 }

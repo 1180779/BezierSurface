@@ -10,7 +10,7 @@ namespace Drawing.Lightning.Concrete
 {
     public class PixelColor : IPixelColor
     {
-        public void ColorPixel(Point p, Triangle t, DrawingBitmapData bitmapData)
+        public void ColorPixel(Point p, Triangle t, DrawingData bitmapData)
         {
             var lambda = BarycentricCoordinatesCalculator.GetBarycentric(p, t);
             
@@ -20,7 +20,6 @@ namespace Drawing.Lightning.Concrete
             Vector3 V = Vector3.UnitZ;
             Vector3 R = Vector3.Normalize(2 * Vector3.Dot(N, L) * N - L);
 
-            float m = 1;
             Vector3 objectColor = new Vector3(0, 1, 0);
             float cosNL = Vector3.Dot(N, L);
             if (cosNL < 0f)
@@ -30,14 +29,20 @@ namespace Drawing.Lightning.Concrete
                 cosVR = 0;
             // TO DO:
             // add colors to triangles
-            float A = bitmapData.LightParams.kd * cosNL;
-            float B = bitmapData.LightParams.ks * (float)Math.Pow(cosVR, m);
+            float A = bitmapData.LightSParams.kd * cosNL;
+            float B = bitmapData.LightSParams.ks * (float)Math.Pow(cosVR, bitmapData.LightSParams.m);
             float colorR =  A * bitmapData.LightS.Color0To1.X * objectColor.X
                 + B * bitmapData.LightS.Color0To1.X * objectColor.X;
             float colorG = A * bitmapData.LightS.Color0To1.Y * objectColor.Y
                 + B * bitmapData.LightS.Color0To1.Y * objectColor.Y;
             float colorB = A * bitmapData.LightS.Color0To1.Z * objectColor.Z
                 + B * bitmapData.LightS.Color0To1.Z * objectColor.Z;
+            if (colorR > 1f)
+                colorR = 1f;
+            if(colorG > 1f)
+                colorG = 1f;
+            if (colorB < 0f)
+                colorB = 0f;
             Color c = Color.FromArgb((int)(colorR * 255), (int)(colorG * 255), (int)(colorB * 255));
 
             // TO DO:

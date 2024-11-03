@@ -18,7 +18,7 @@ namespace Drawing.RotationAndTriangulation.Concrete
             LineDraw = lineDraw;
             Vector3Draw = vector3Draw;
         }
-        public void DrawTriangle(Triangle t, DrawingBitmapData bitmapData)
+        public void DrawTriangle(Triangle t, DrawingData bitmapData)
         {
             LineDraw.DrawLine(t.A.PR, t.B.PR, bitmapData);
             LineDraw.DrawLine(t.A.PR, t.C.PR, bitmapData);

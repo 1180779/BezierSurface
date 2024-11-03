@@ -17,7 +17,7 @@ namespace Drawing.Bezier.Concrete
             TriangleDraw = triangleDraw;
         }
 
-        public void DrawTriangulatedBezier(TriangulatedBezierSurface bs, DrawingBitmapData bitmapData)
+        public void Draw(TriangulatedBezierSurface bs, DrawingData bitmapData)
         {
             foreach (var triangle in bs.Triangles)
             {
