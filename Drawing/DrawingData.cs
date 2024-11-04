@@ -22,9 +22,9 @@ namespace Drawing
             LightSParams = new LightParameters();
             LightSParams.PropertyChanged += RecalculatePartialLightComputations;
 
-            LightS = new LightSource(new Vector3(0, 0, 100), Color.White); // new Vector3(-100, -1000, 0)
-            //LightS = new MovingLightSource(new Vector3(0, 0, 400), Color.White); // new Vector3(-100, -1000, 0)
-            //LightS.StartMoving();
+            //LightS = new LightSource(new Vector3(0, 0, 100), Color.White); // new Vector3(-100, -1000, 0)
+            LightS = new MovingLightSource(new Vector3(0, 0, 400), Color.White); // new Vector3(-100, -1000, 0)
+            LightS.StartMoving();
             LightS.PropertyChanged += RecalculatePartialLightComputations;
 
             SurfaceColor = new ObjectColor();
@@ -41,7 +41,7 @@ namespace Drawing
         public Brush? Brush { get; set; }
         public ObjectColor SurfaceColor;
         public LightParameters LightSParams;
-        public ILightSource LightS;
+        public IMovingLightSource LightS;
         public PartialLightComputations PartialLightComputations;
         public void RecalculatePartialLightComputations(Object? sender, PropertyChangedEventArgs e) 
             => PartialLightComputations.Recalculate(SurfaceColor, LightSParams, LightS);

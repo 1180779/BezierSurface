@@ -26,6 +26,8 @@ namespace BezierSurface
             checkBoxDrawSurface.Checked = true;
         }
 
+        public CancellationTokenSource CTS { get; set; } = new();
+
         private Bitmap _lightColorBitmap;
         private Bitmap _surfaceColorBitmap;
         private DirectBitmap _dbitmap;
@@ -59,7 +61,7 @@ namespace BezierSurface
 
             InitializeDrawingSelection();
 
-            CanvasRedraw();
+            //CanvasRedraw();
 
             // select surface color
             _surfaceColorBitmap = new Bitmap(pictureBoxSurfaceColor.Width, pictureBoxSurfaceColor.Height);
@@ -76,6 +78,29 @@ namespace BezierSurface
                 g.Clear(_drawingData.LightS.Color);
             }
             pictureBoxLightColor.Image = _lightColorBitmap;
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            // TO DO: Create thread to update z slider
+            new Thread((t) =>
+            {
+                CancellationToken token = (CancellationToken)t;
+                while (!token.IsCancellationRequested)
+                {
+                    trackBarParameter.BeginInvoke((MethodInvoker)(() => {
+                        trackBarParameter.Value = (int)(_drawingData.LightS.Parameter * 100);
+                        textBoxParameter.Text = (_drawingData.LightS.Parameter * 2 * Math.PI).ToString();
+                    }));
+                    Thread.Sleep(250);
+            } 
+            }).Start(CTS.Token);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CTS.Cancel();
+            _drawingData.LightS.StopMoving();
         }
 
         private void CanvasRedraw()
@@ -196,6 +221,14 @@ namespace BezierSurface
                 pictureBoxLightColor.Update();
                 CanvasRedraw();
             }
+        }
+
+        private void trackBarParameter_Scroll(object sender, EventArgs e)
+        {
+            float value = ((float)trackBarParameter.Value / 100);
+            textBoxParameter.Text = (value * 2 * (float)Math.PI).ToString();
+            _drawingData.LightS.Parameter = value;
+            CanvasRedraw();
         }
     }
 }

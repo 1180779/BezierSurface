@@ -31,6 +31,10 @@
             canvas = new PictureBox();
             groupBoxOptions = new GroupBox();
             groupBoxLight = new GroupBox();
+            textBoxParameter = new TextBox();
+            trackBarParameter = new TrackBar();
+            pictureBoxLightColor = new PictureBox();
+            buttonLightColor = new Button();
             groupBoxSurface = new GroupBox();
             pictureBoxSurfaceColor = new PictureBox();
             buttonSurfaceColor = new Button();
@@ -55,11 +59,11 @@
             groupBox1 = new GroupBox();
             trackBarTrianglesN = new TrackBar();
             textBoxTrianglesN = new TextBox();
-            buttonLightColor = new Button();
-            pictureBoxLightColor = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)canvas).BeginInit();
             groupBoxOptions.SuspendLayout();
             groupBoxLight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBarParameter).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLightColor).BeginInit();
             groupBoxSurface.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxSurfaceColor).BeginInit();
             groupBoxM.SuspendLayout();
@@ -74,7 +78,6 @@
             ((System.ComponentModel.ISupportInitialize)trackBarAlpha).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarTrianglesN).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxLightColor).BeginInit();
             SuspendLayout();
             // 
             // canvas
@@ -104,14 +107,52 @@
             // 
             // groupBoxLight
             // 
+            groupBoxLight.Controls.Add(textBoxParameter);
+            groupBoxLight.Controls.Add(trackBarParameter);
             groupBoxLight.Controls.Add(pictureBoxLightColor);
             groupBoxLight.Controls.Add(buttonLightColor);
             groupBoxLight.Location = new Point(6, 215);
             groupBoxLight.Name = "groupBoxLight";
-            groupBoxLight.Size = new Size(186, 125);
+            groupBoxLight.Size = new Size(186, 171);
             groupBoxLight.TabIndex = 22;
             groupBoxLight.TabStop = false;
             groupBoxLight.Text = "światło";
+            // 
+            // textBoxParameter
+            // 
+            textBoxParameter.Enabled = false;
+            textBoxParameter.Location = new Point(8, 87);
+            textBoxParameter.Name = "textBoxParameter";
+            textBoxParameter.Size = new Size(50, 27);
+            textBoxParameter.TabIndex = 10;
+            // 
+            // trackBarParameter
+            // 
+            trackBarParameter.Location = new Point(64, 87);
+            trackBarParameter.Maximum = 100;
+            trackBarParameter.Name = "trackBarParameter";
+            trackBarParameter.Size = new Size(116, 56);
+            trackBarParameter.TabIndex = 10;
+            trackBarParameter.Value = 50;
+            trackBarParameter.Scroll += trackBarParameter_Scroll;
+            // 
+            // pictureBoxLightColor
+            // 
+            pictureBoxLightColor.Location = new Point(126, 26);
+            pictureBoxLightColor.Name = "pictureBoxLightColor";
+            pictureBoxLightColor.Size = new Size(54, 55);
+            pictureBoxLightColor.TabIndex = 5;
+            pictureBoxLightColor.TabStop = false;
+            // 
+            // buttonLightColor
+            // 
+            buttonLightColor.Location = new Point(9, 26);
+            buttonLightColor.Name = "buttonLightColor";
+            buttonLightColor.Size = new Size(114, 55);
+            buttonLightColor.TabIndex = 5;
+            buttonLightColor.Text = "Zmień kolor";
+            buttonLightColor.UseVisualStyleBackColor = true;
+            buttonLightColor.Click += buttonLightColor_Click;
             // 
             // groupBoxSurface
             // 
@@ -355,24 +396,6 @@
             textBoxTrianglesN.Size = new Size(50, 27);
             textBoxTrianglesN.TabIndex = 1;
             // 
-            // buttonLightColor
-            // 
-            buttonLightColor.Location = new Point(9, 26);
-            buttonLightColor.Name = "buttonLightColor";
-            buttonLightColor.Size = new Size(114, 55);
-            buttonLightColor.TabIndex = 5;
-            buttonLightColor.Text = "Zmień kolor";
-            buttonLightColor.UseVisualStyleBackColor = true;
-            buttonLightColor.Click += buttonLightColor_Click;
-            // 
-            // pictureBoxLightColor
-            // 
-            pictureBoxLightColor.Location = new Point(126, 26);
-            pictureBoxLightColor.Name = "pictureBoxLightColor";
-            pictureBoxLightColor.Size = new Size(54, 55);
-            pictureBoxLightColor.TabIndex = 5;
-            pictureBoxLightColor.TabStop = false;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -382,9 +405,14 @@
             Controls.Add(canvas);
             Name = "Form1";
             Text = "Form1";
+            FormClosing += Form1_FormClosing;
+            Shown += Form1_Shown;
             ((System.ComponentModel.ISupportInitialize)canvas).EndInit();
             groupBoxOptions.ResumeLayout(false);
             groupBoxLight.ResumeLayout(false);
+            groupBoxLight.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBarParameter).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLightColor).EndInit();
             groupBoxSurface.ResumeLayout(false);
             groupBoxSurface.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxSurfaceColor).EndInit();
@@ -406,7 +434,6 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarTrianglesN).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxLightColor).EndInit();
             ResumeLayout(false);
         }
 
@@ -441,5 +468,7 @@
         private Button buttonSurfaceColor;
         private PictureBox pictureBoxLightColor;
         private Button buttonLightColor;
+        private TextBox textBoxParameter;
+        private TrackBar trackBarParameter;
     }
 }

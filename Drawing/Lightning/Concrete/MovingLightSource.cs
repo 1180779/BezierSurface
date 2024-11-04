@@ -59,10 +59,21 @@ namespace Drawing.Lightning.Concrete
         public bool IsMoving => _threadData.Thread is not null;
         public float Parameter 
         { 
-            get { return _threadData.Parameter; } 
+            get 
+            {
+                float res;
+                lock(_threadData.ParameterLock)
+                {
+                    res = _threadData.Parameter;
+                }
+                return res; 
+            } 
             set 
-            { 
-                _threadData.Parameter = value;
+            {
+                lock (_threadData.ParameterLock)
+                {
+                    _threadData.Parameter = value;
+                }
 
                 _location.X = _threadData.R * (float)Math.Cos(Parameter * 2 * Math.PI);
                 _location.Y = _threadData.R * (float)Math.Sin(Parameter * 2 * Math.PI);
@@ -74,7 +85,7 @@ namespace Drawing.Lightning.Concrete
             set
             {
                 _threadData.ParameterStep = value;
-                _threadData.SleepSeconds = 
+                _threadData.SleepMiliseconds = 
                     (int)(TSeconds * _threadData.ParameterStep * 1000);
             }
         }
@@ -85,7 +96,7 @@ namespace Drawing.Lightning.Concrete
             set 
             { 
                 _threadData.TSeconds = value;
-                _threadData.SleepSeconds = (int)(TSeconds * Step * 1000);
+                _threadData.SleepMiliseconds = (int)(TSeconds * Step * 1000);
             } 
         }
 
@@ -104,10 +115,13 @@ namespace Drawing.Lightning.Concrete
                 ThreadData tData = (ThreadData)obj;
                 while(!tData.CancellationToken.IsCancellationRequested)
                 {
-                    Thread.Sleep(tData.SleepSeconds);
-                    tData.Parameter += tData.ParameterStep;
-                    if(tData.Parameter > 1f)
-                        tData.Parameter -= 1f;
+                    Thread.Sleep(tData.SleepMiliseconds);
+                    lock (tData.ParameterLock)
+                    {
+                        tData.Parameter += tData.ParameterStep;
+                        if (tData.Parameter >= 1f)
+                            tData.Parameter -= 1f;
+                    }
 
                     tData.source.Location = new Vector3(
                         tData.R * (float)Math.Cos(tData.Parameter * 2 * Math.PI),
@@ -140,10 +154,11 @@ namespace Drawing.Lightning.Concrete
             source = movingLightSource;
         }
         internal int TSeconds { get; set; } = 20;
-        internal float ParameterStep { get; set; } = 0.05f;
-        internal int SleepSeconds { get; set; } = 1000;
+        internal float ParameterStep { get; set; } = 0.025f;
+        internal int SleepMiliseconds { get; set; } = 500;
+        internal object ParameterLock = new();
         internal float Parameter { get; set; } = 0f;
-        internal float R { get; set; } = 250;
+        internal float R { get; set; } = 250f;
         internal CancellationTokenSource TokenSource = new();
         internal CancellationToken CancellationToken { get; set; }
         internal Thread? Thread = null;
