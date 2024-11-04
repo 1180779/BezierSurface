@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -11,21 +12,24 @@ using System.Threading.Tasks;
 
 namespace Drawing.Lightning.Concrete
 {
-    public struct MovingLightSource : IMovingLightSource
+    public class MovingLightSource : IMovingLightSource
     {
         private Color _color;
         private Vector3 _color0To1;
-        public MovingLightSource(Vector3 location)
+        public object _configLock;
+        public MovingLightSource(Vector3 location, object congigLock)
         {
             _threadData = new ThreadData(this);
             Location = location;
             Color = Color.FromArgb(1, 255, 255, 255);
+            _configLock = congigLock;
         }
-        public MovingLightSource(Vector3 location, Color color)
+        public MovingLightSource(Vector3 location, Color color, object congigLock)
         {
             _threadData = new ThreadData(this);
             Location = location;
             Color = color;
+            _configLock = congigLock;
         }
         private Vector3 _location;
         public Vector3 Location
@@ -33,8 +37,6 @@ namespace Drawing.Lightning.Concrete
             get { return _location; }
             set
             {
-                if (_location == value)
-                    return;
                 _location = value;
             }
         }
@@ -43,8 +45,6 @@ namespace Drawing.Lightning.Concrete
             get { return _color; }
             set
             {
-                if (_color == value)
-                    return;
                 _color = value;
                 _color0To1 = new Vector3(
                     (float)Color.R / 255,
@@ -70,13 +70,16 @@ namespace Drawing.Lightning.Concrete
             } 
             set 
             {
-                lock (_threadData.ParameterLock)
+                lock(_configLock)
                 {
-                    _threadData.Parameter = value;
-                }
+                    lock (_threadData.ParameterLock)
+                    {
+                        _threadData.Parameter = value;
+                    }
 
-                _location.X = _threadData.R * (float)Math.Cos(Parameter * 2 * Math.PI);
-                _location.Y = _threadData.R * (float)Math.Sin(Parameter * 2 * Math.PI);
+                    _location.X = _threadData.R * (float)Math.Cos(Parameter * 2 * Math.PI);
+                    _location.Y = _threadData.R * (float)Math.Sin(Parameter * 2 * Math.PI);
+                }
             }
         }
         public float Step 
@@ -113,20 +116,29 @@ namespace Drawing.Lightning.Concrete
                     throw new InvalidAsynchronousStateException();
 
                 ThreadData tData = (ThreadData)obj;
-                while(!tData.CancellationToken.IsCancellationRequested)
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                while (!tData.CancellationToken.IsCancellationRequested)
                 {
                     Thread.Sleep(tData.SleepMiliseconds);
-                    lock (tData.ParameterLock)
+                    lock(tData.source._configLock)
                     {
-                        tData.Parameter += tData.ParameterStep;
-                        if (tData.Parameter >= 1f)
-                            tData.Parameter -= 1f;
+                        lock (tData.ParameterLock)
+                        {
+                            sw.Stop();
+                            float realStep = tData.ParameterStep
+                                * ((float)sw.ElapsedMilliseconds / (float)tData.SleepMiliseconds);
+                            tData.Parameter += realStep;
+                            if (tData.Parameter >= 1f)
+                                tData.Parameter -= 1f;
+                            sw.Restart();
+                            sw.Start();
+                        }
+                        tData.source.Location = new Vector3(
+                            _threadData.R * (float)Math.Cos(Parameter * 2 * Math.PI),
+                            _threadData.R * (float)Math.Sin(Parameter * 2 * Math.PI),
+                            tData.source.Location.Z);
                     }
-
-                    tData.source.Location = new Vector3(
-                        tData.R * (float)Math.Cos(tData.Parameter * 2 * Math.PI),
-                        tData.R * (float)Math.Sin(tData.Parameter * 2 * Math.PI),
-                        tData.source.Location.Z);
                 }
 
                 if (!tData.TokenSource.TryReset())
@@ -149,19 +161,19 @@ namespace Drawing.Lightning.Concrete
 
     internal class ThreadData
     {
-        internal ThreadData(IMovingLightSource movingLightSource) 
+        internal ThreadData(MovingLightSource movingLightSource) 
         {
             source = movingLightSource;
         }
         internal int TSeconds { get; set; } = 20;
-        internal float ParameterStep { get; set; } = 0.025f;
-        internal int SleepMiliseconds { get; set; } = 500;
+        internal float ParameterStep { get; set; } = 0.005f;
+        internal int SleepMiliseconds { get; set; } = 100;
         internal object ParameterLock = new();
         internal float Parameter { get; set; } = 0f;
         internal float R { get; set; } = 250f;
         internal CancellationTokenSource TokenSource = new();
         internal CancellationToken CancellationToken { get; set; }
         internal Thread? Thread = null;
-        internal IMovingLightSource source;
+        internal MovingLightSource source;
     }
 }

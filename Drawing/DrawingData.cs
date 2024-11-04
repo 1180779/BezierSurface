@@ -13,7 +13,7 @@ namespace Drawing
 {
     public class DrawingData
     {
-        public DrawingData(DirectBitmap dbitmap, int adjX, int adjY)
+        public DrawingData(DirectBitmap dbitmap, int adjX, int adjY, object configLock)
         {
             DBitmap = dbitmap;
             AdjX = adjX;
@@ -23,7 +23,7 @@ namespace Drawing
             LightSParams.PropertyChanged += RecalculatePartialLightComputations;
 
             //LightS = new LightSource(new Vector3(0, 0, 100), Color.White); // new Vector3(-100, -1000, 0)
-            LightS = new MovingLightSource(new Vector3(0, 0, 400), Color.White); // new Vector3(-100, -1000, 0)
+            LightS = new MovingLightSource(new Vector3(0, 0, 400), Color.White, configLock); // new Vector3(-100, -1000, 0)
             LightS.StartMoving();
             LightS.PropertyChanged += RecalculatePartialLightComputations;
 
@@ -34,7 +34,6 @@ namespace Drawing
         }
         public int AdjX { get; set; }
         public int AdjY { get; set; }
-        public float Theta { get; set; } // light source placement on a circle
         public DirectBitmap DBitmap { get; set; }
         public Graphics? G { get; set; }
         public Pen? Pen { get; set; }

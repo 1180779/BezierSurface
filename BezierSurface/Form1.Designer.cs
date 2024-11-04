@@ -31,6 +31,7 @@
             canvas = new PictureBox();
             groupBoxOptions = new GroupBox();
             groupBoxLight = new GroupBox();
+            checkBoxLightMoving = new CheckBox();
             textBoxParameter = new TextBox();
             trackBarParameter = new TrackBar();
             pictureBoxLightColor = new PictureBox();
@@ -107,6 +108,7 @@
             // 
             // groupBoxLight
             // 
+            groupBoxLight.Controls.Add(checkBoxLightMoving);
             groupBoxLight.Controls.Add(textBoxParameter);
             groupBoxLight.Controls.Add(trackBarParameter);
             groupBoxLight.Controls.Add(pictureBoxLightColor);
@@ -117,6 +119,17 @@
             groupBoxLight.TabIndex = 22;
             groupBoxLight.TabStop = false;
             groupBoxLight.Text = "światło";
+            // 
+            // checkBoxLightMoving
+            // 
+            checkBoxLightMoving.AutoSize = true;
+            checkBoxLightMoving.Location = new Point(9, 120);
+            checkBoxLightMoving.Name = "checkBoxLightMoving";
+            checkBoxLightMoving.Size = new Size(113, 24);
+            checkBoxLightMoving.TabIndex = 11;
+            checkBoxLightMoving.Text = "Ruch światła";
+            checkBoxLightMoving.UseVisualStyleBackColor = true;
+            checkBoxLightMoving.CheckedChanged += checkBoxLightMoving_CheckedChanged;
             // 
             // textBoxParameter
             // 
@@ -470,5 +483,6 @@
         private Button buttonLightColor;
         private TextBox textBoxParameter;
         private TrackBar trackBarParameter;
+        private CheckBox checkBoxLightMoving;
     }
 }
