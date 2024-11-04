@@ -24,8 +24,7 @@ namespace Drawing.Lightning.Concrete
             float cosVR = Vector3.Dot(Vector3.UnitZ, R);
             if (cosVR < 0)
                 cosVR = 0;
-            // TO DO:
-            // add colors to triangles
+
             Vector3 color = bitmapData.PartialLightComputations.A * cosNL +
                 bitmapData.PartialLightComputations.B * (float)Math.Pow(cosVR, bitmapData.LightSParams.m);
             for (int i = 0; i < 3; ++i)
@@ -35,13 +34,9 @@ namespace Drawing.Lightning.Concrete
             }
             Color c = Color.FromArgb((int)(color[0] * 255), (int)(color[1] * 255), (int)(color[2] * 255));
 
-            // TO DO:
-            // change to set pixel
-            // (how does transformation change final placement???)
-            //bitmapData.DBitmap.SetPixel(p.X + bitmapData.AdjX, p.Y + bitmapData.AdjY, c);
-
-            using Brush b = new SolidBrush(c);
-            bitmapData.G.FillRectangle(b, new Rectangle(p.X, p.Y, 1, 1));
+            bitmapData.DBitmap.SetPixel(p.X + bitmapData.AdjX, bitmapData.AdjY - p.Y, c);
+            //using Brush b = new SolidBrush(c);
+            //bitmapData.G.FillRectangle(b, new Rectangle(p.X, p.Y, 1, 1));
         }
     }
 }

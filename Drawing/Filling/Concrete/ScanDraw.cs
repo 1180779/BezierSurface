@@ -23,7 +23,7 @@ namespace Drawing.Filling.Concrete
             if (X2 < X1)
                 throw new InvalidOperationException();
             p.Y = y;
-            for (int i = X1; i < X2; i++) 
+            for (int i = X1; i <= X2; i++) 
             {
                 p.X = i;
                 PixelColor.ColorPixel(p, t, bitmapData);

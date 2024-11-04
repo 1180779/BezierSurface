@@ -26,6 +26,8 @@ namespace BezierSurface
             checkBoxDrawSurface.Checked = true;
         }
 
+        private Bitmap _lightColorBitmap;
+        private Bitmap _surfaceColorBitmap;
         private DirectBitmap _dbitmap;
         private DrawingData _drawingData;
         private TriangulatedBezierSurface _surface;
@@ -33,8 +35,6 @@ namespace BezierSurface
         public Form1()
         {
             InitializeComponent();
-
-            InitializeDrawingSelection();
 
             _dbitmap = new DirectBitmap(canvas.Width, canvas.Height);
             canvas.Image = _dbitmap.Bitmap;
@@ -57,27 +57,28 @@ namespace BezierSurface
             _surface.Alpha = alphaVal / 360 * 2 * (float)Math.PI;
             _surface.Beta = betaVal / 360 * 2 * (float)Math.PI;
 
-            using (Graphics g = Graphics.FromImage(_dbitmap.Bitmap))
+            InitializeDrawingSelection();
+
+            CanvasRedraw();
+
+            // select surface color
+            _surfaceColorBitmap = new Bitmap(pictureBoxSurfaceColor.Width, pictureBoxSurfaceColor.Height);
+            using (Graphics g = Graphics.FromImage(_surfaceColorBitmap))
             {
-                _drawingData.G = g;
-
-                g.ScaleTransform(1, -1);
-                g.TranslateTransform(canvas.Width / 2, -canvas.Height / 2);
-
-                g.Clear(Color.White);
-
-                if (DrawingSelection.Surface)
-                    DrawingObject.DrawSurface(_surface, _drawingData);
-                if (DrawingSelection.Triangles)
-                    DrawingObject.DrawTriangulatedBezier(_surface, _drawingData);
-                if (DrawingSelection.Controls)
-                    DrawingObject.DrawBezier(_surface, _drawingData);
-
-                _drawingData.G = null;
+                g.Clear(_drawingData.SurfaceColor.Color);
             }
+            pictureBoxSurfaceColor.Image = _surfaceColorBitmap;
+
+            // select light color
+            _lightColorBitmap = new Bitmap(pictureBoxLightColor.Width, pictureBoxLightColor.Height);
+            using (Graphics g = Graphics.FromImage(_lightColorBitmap))
+            {
+                g.Clear(_drawingData.LightS.Color);
+            }
+            pictureBoxLightColor.Image = _lightColorBitmap;
         }
 
-        private void canvas_Paint(object sender, PaintEventArgs e)
+        private void CanvasRedraw()
         {
             using (Graphics g = Graphics.FromImage(_dbitmap.Bitmap))
             {
@@ -86,7 +87,7 @@ namespace BezierSurface
                 _drawingData.G = g;
 
                 g.Clear(Color.White);
-                
+
                 if (DrawingSelection.Surface)
                     DrawingObject.DrawSurface(_surface, _drawingData);
                 if (DrawingSelection.Triangles)
@@ -96,14 +97,15 @@ namespace BezierSurface
 
                 _drawingData.G = null;
             }
-            canvas.Image = _dbitmap.Bitmap;
+            canvas.Invalidate();
+            canvas.Update();
         }
 
         private void trackBarTrianglesN_Scroll(object sender, EventArgs e)
         {
             _surface.N = trackBarTrianglesN.Value;
             textBoxTrianglesN.Text = trackBarTrianglesN.Value.ToString();
-            canvas.Invalidate();
+            CanvasRedraw();
         }
 
         private void trackBarAlpha_Scroll(object sender, EventArgs e)
@@ -111,7 +113,7 @@ namespace BezierSurface
             float value = trackBarAlpha.Value / 4;
             _surface.Alpha = value / 360 * 2 * (float)Math.PI;
             textBoxAlpha.Text = value.ToString();
-            canvas.Invalidate();
+            CanvasRedraw();
         }
 
         private void trackBarBeta_Scroll(object sender, EventArgs e)
@@ -119,7 +121,7 @@ namespace BezierSurface
             float value = trackBarBeta.Value / 4;
             _surface.Beta = value / 360 * 2 * (float)Math.PI;
             textBoxBeta.Text = value.ToString();
-            canvas.Invalidate();
+            CanvasRedraw();
         }
 
         private void trackBarKD_Scroll(object sender, EventArgs e)
@@ -128,7 +130,7 @@ namespace BezierSurface
             _drawingData.LightSParams.kd = value;
             textBoxKD.Text = value.ToString();
             _drawingData.RecalculatePartialLightComputations();
-            canvas.Invalidate();
+            CanvasRedraw();
         }
 
         private void trackBarKS_Scroll(object sender, EventArgs e)
@@ -137,7 +139,7 @@ namespace BezierSurface
             _drawingData.LightSParams.ks = value;
             _drawingData.RecalculatePartialLightComputations();
             textBoxKS.Text = value.ToString();
-            canvas.Invalidate();
+            CanvasRedraw();
         }
 
         private void trackBarM_Scroll(object sender, EventArgs e)
@@ -146,25 +148,59 @@ namespace BezierSurface
             _drawingData.LightSParams.m = value;
             _drawingData.RecalculatePartialLightComputations();
             textBoxM.Text = value.ToString();
-            canvas.Invalidate();
+            CanvasRedraw();
         }
 
         private void checkBoxDrawControls_CheckedChanged(object sender, EventArgs e)
         {
             DrawingSelection.Controls = checkBoxDrawControls.Checked;
-            canvas.Invalidate();
+            CanvasRedraw();
         }
 
         private void checkBoxDrawTriangles_CheckedChanged(object sender, EventArgs e)
         {
             DrawingSelection.Triangles = checkBoxDrawTriangles.Checked;
-            canvas.Invalidate();
+            CanvasRedraw();
         }
 
         private void checkBoxDrawSurface_CheckedChanged(object sender, EventArgs e)
         {
             DrawingSelection.Surface = checkBoxDrawSurface.Checked;
-            canvas.Invalidate();
+            CanvasRedraw();
+        }
+
+        private void buttonSurfaceColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _drawingData.SurfaceColor.Color = dialog.Color;
+                _drawingData.RecalculatePartialLightComputations();
+                using (Graphics g = Graphics.FromImage(_surfaceColorBitmap))
+                {
+                    g.Clear(_drawingData.SurfaceColor.Color);
+                }
+                pictureBoxSurfaceColor.Invalidate();
+                pictureBoxSurfaceColor.Update();
+                CanvasRedraw();
+            }
+        }
+
+        private void buttonLightColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _drawingData.LightS.Color = dialog.Color;
+                _drawingData.RecalculatePartialLightComputations();
+                using (Graphics g = Graphics.FromImage(_lightColorBitmap))
+                {
+                    g.Clear(_drawingData.LightS.Color);
+                }
+                pictureBoxLightColor.Invalidate();
+                pictureBoxLightColor.Update();
+                CanvasRedraw();
+            }
         }
     }
 }

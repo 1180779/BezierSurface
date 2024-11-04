@@ -14,16 +14,12 @@ namespace Drawing.Lightning.Concrete
         public LightSource(Vector3 location)
         {
             Location = location;
-            _color = Color.FromArgb(1, 255, 255, 255);
+            Color = Color.FromArgb(1, 255, 255, 255);
         }
         public LightSource(Vector3 location, Color color)
         {
             Location = location;
-            _color = color;
-            _color0To1 = new Vector3(
-                    (float)Color.R / 255,
-                    (float)Color.G / 255,
-                    (float)Color.B / 255);
+            Color = color;
         }
         public Vector3 Location { get; set; }
         public Color Color 
@@ -31,8 +27,7 @@ namespace Drawing.Lightning.Concrete
             get { return _color; }
             set 
             {
-                if (_color == value)
-                    return;
+                _color = value;
                 _color0To1 = new Vector3(
                     (float)Color.R / 255,
                     (float)Color.G / 255,

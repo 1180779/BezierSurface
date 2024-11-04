@@ -12,19 +12,17 @@ namespace Drawing.Filling
 {
     public class EdgeTable
     {
+        private int _count = 0;
         public int MinY { get; private set; }
         public int MaxY { get; private set; }
         public List<EdgeList> Edges { get; private set; } = [];
 
-        public bool IsEmpty
+        public bool IsEmpty { get { return _count == 0; } }
+        public List<EdgeItem> Extract(int i) 
         {
-            get
-            {
-                foreach (EdgeList edge in Edges)
-                    if (!edge.IsEmpty)
-                        return false;
-                return true;
-            }
+            var res = this[i].Extract();
+            _count -= res.Count;
+            return res;
         }
         public int Adj { get; private set; }
         public EdgeTable(int height) 
@@ -36,12 +34,10 @@ namespace Drawing.Filling
             for (int i = -Adj; i < Adj; ++i) 
             {
                 Edges.Add(new EdgeList());
-                //this[i] = new EdgeList();
             }
         }
         public void Fill(IPolygon p)
         {
-            // TO DO: fill the Edges list
             Edge[] copy = new Edge[p.Edges.Length];
             for(int i = 0; i < p.Edges.Length; ++i)
             {
@@ -55,6 +51,7 @@ namespace Drawing.Filling
                 if (y < -Adj || y >= Adj)
                     continue;
                 this[y].Add(new EdgeItem(edge));
+                _count++;
             }
         }
         public EdgeList this[int i] 

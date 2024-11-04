@@ -9,14 +9,12 @@ namespace Drawing.Lightning
 {
     public struct ObjectColor
     {
-        private Color _color = Color.Purple;
+        private Color _color;
         public Color Color 
         {
             get { return _color; }
             set 
             {
-                if (value == _color)
-                    return;
                 _color = value;
                 Color0To1 = new Vector3((float)_color.R / 255, (float)_color.G / 255, (float)_color.B / 255);
             }

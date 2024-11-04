@@ -54,7 +54,7 @@ namespace Drawing.Filling.Concrete
             while ((!AET.IsEmpty || !ET.IsEmpty) && i < ET.Adj)
             {
                 // przenieś  listy z kubełka ET[y] do AET (ymin = y)
-                AET.AddRange(ET[i].Extract());
+                AET.AddRange(ET.Extract(i));
 
                 // posortuj listę AET wg x
                 AET.Edges.Sort(new EdgeItemComparer());
@@ -71,14 +71,10 @@ namespace Drawing.Filling.Concrete
                         i,
                         t,
                         bitmapData);
-                    //LineDraw.DrawLine(
-                    //    new Point((int)AET.Edges[0].X, i),
-                    //    new Point((int)AET.Edges[2].X, i),
-                    //    bitmapData);
                 }
                 else
                 {
-                    for(int j = 0; j < AET.Edges.Count; j += 2)
+                    for (int j = 0; j < AET.Edges.Count; j += 2)
                     {
                         ScanDraw.DrawScan(
                         (int)AET.Edges[j].X,
@@ -86,10 +82,6 @@ namespace Drawing.Filling.Concrete
                         i,
                         t,
                         bitmapData);
-                        //LineDraw.DrawLine(
-                        //    new Point((int)AET.Edges[j].X, i),
-                        //    new Point((int)AET.Edges[j + 1].X, i),
-                        //    bitmapData);
                     }
                 }
 

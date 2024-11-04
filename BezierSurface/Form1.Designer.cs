@@ -32,6 +32,8 @@
             groupBoxOptions = new GroupBox();
             groupBoxLight = new GroupBox();
             groupBoxSurface = new GroupBox();
+            pictureBoxSurfaceColor = new PictureBox();
+            buttonSurfaceColor = new Button();
             checkBoxDrawSurface = new CheckBox();
             checkBoxDrawTriangles = new CheckBox();
             checkBoxDrawControls = new CheckBox();
@@ -53,9 +55,13 @@
             groupBox1 = new GroupBox();
             trackBarTrianglesN = new TrackBar();
             textBoxTrianglesN = new TextBox();
+            buttonLightColor = new Button();
+            pictureBoxLightColor = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)canvas).BeginInit();
             groupBoxOptions.SuspendLayout();
+            groupBoxLight.SuspendLayout();
             groupBoxSurface.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxSurfaceColor).BeginInit();
             groupBoxM.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarM).BeginInit();
             groupBoxKS.SuspendLayout();
@@ -68,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)trackBarAlpha).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarTrianglesN).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLightColor).BeginInit();
             SuspendLayout();
             // 
             // canvas
@@ -77,7 +84,6 @@
             canvas.Size = new Size(661, 444);
             canvas.TabIndex = 0;
             canvas.TabStop = false;
-            canvas.Paint += canvas_Paint;
             // 
             // groupBoxOptions
             // 
@@ -98,6 +104,8 @@
             // 
             // groupBoxLight
             // 
+            groupBoxLight.Controls.Add(pictureBoxLightColor);
+            groupBoxLight.Controls.Add(buttonLightColor);
             groupBoxLight.Location = new Point(6, 215);
             groupBoxLight.Name = "groupBoxLight";
             groupBoxLight.Size = new Size(186, 125);
@@ -107,6 +115,8 @@
             // 
             // groupBoxSurface
             // 
+            groupBoxSurface.Controls.Add(pictureBoxSurfaceColor);
+            groupBoxSurface.Controls.Add(buttonSurfaceColor);
             groupBoxSurface.Controls.Add(checkBoxDrawSurface);
             groupBoxSurface.Controls.Add(checkBoxDrawTriangles);
             groupBoxSurface.Controls.Add(checkBoxDrawControls);
@@ -116,6 +126,24 @@
             groupBoxSurface.TabIndex = 21;
             groupBoxSurface.TabStop = false;
             groupBoxSurface.Text = "opcje powierzchni";
+            // 
+            // pictureBoxSurfaceColor
+            // 
+            pictureBoxSurfaceColor.Location = new Point(126, 116);
+            pictureBoxSurfaceColor.Name = "pictureBoxSurfaceColor";
+            pictureBoxSurfaceColor.Size = new Size(54, 55);
+            pictureBoxSurfaceColor.TabIndex = 4;
+            pictureBoxSurfaceColor.TabStop = false;
+            // 
+            // buttonSurfaceColor
+            // 
+            buttonSurfaceColor.Location = new Point(6, 116);
+            buttonSurfaceColor.Name = "buttonSurfaceColor";
+            buttonSurfaceColor.Size = new Size(114, 55);
+            buttonSurfaceColor.TabIndex = 3;
+            buttonSurfaceColor.Text = "Zmień kolor";
+            buttonSurfaceColor.UseVisualStyleBackColor = true;
+            buttonSurfaceColor.Click += buttonSurfaceColor_Click;
             // 
             // checkBoxDrawSurface
             // 
@@ -327,6 +355,24 @@
             textBoxTrianglesN.Size = new Size(50, 27);
             textBoxTrianglesN.TabIndex = 1;
             // 
+            // buttonLightColor
+            // 
+            buttonLightColor.Location = new Point(9, 26);
+            buttonLightColor.Name = "buttonLightColor";
+            buttonLightColor.Size = new Size(114, 55);
+            buttonLightColor.TabIndex = 5;
+            buttonLightColor.Text = "Zmień kolor";
+            buttonLightColor.UseVisualStyleBackColor = true;
+            buttonLightColor.Click += buttonLightColor_Click;
+            // 
+            // pictureBoxLightColor
+            // 
+            pictureBoxLightColor.Location = new Point(126, 26);
+            pictureBoxLightColor.Name = "pictureBoxLightColor";
+            pictureBoxLightColor.Size = new Size(54, 55);
+            pictureBoxLightColor.TabIndex = 5;
+            pictureBoxLightColor.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -338,8 +384,10 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)canvas).EndInit();
             groupBoxOptions.ResumeLayout(false);
+            groupBoxLight.ResumeLayout(false);
             groupBoxSurface.ResumeLayout(false);
             groupBoxSurface.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxSurfaceColor).EndInit();
             groupBoxM.ResumeLayout(false);
             groupBoxM.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarM).EndInit();
@@ -358,6 +406,7 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarTrianglesN).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLightColor).EndInit();
             ResumeLayout(false);
         }
 
@@ -388,5 +437,9 @@
         private CheckBox checkBoxDrawSurface;
         private CheckBox checkBoxDrawTriangles;
         private CheckBox checkBoxDrawControls;
+        private PictureBox pictureBoxSurfaceColor;
+        private Button buttonSurfaceColor;
+        private PictureBox pictureBoxLightColor;
+        private Button buttonLightColor;
     }
 }
