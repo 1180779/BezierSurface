@@ -89,7 +89,11 @@ namespace Objects.Bezier
                 for(int j = 0; j <= N; j++)
                 {
                     _points[i, j].PR = Vector3.Transform(Vector3.Transform(_points[i, j].P, rotationZ), rotationX);
-                    _points[i, j].NR = Vector3.Transform(Vector3.Transform(_points[i, j].N, rotationZ), rotationX);
+
+                    _points[i, j].PuR = Vector3.Transform(Vector3.Transform(_points[i, j].Pu, rotationZ), rotationX);
+                    _points[i, j].PvR = Vector3.Transform(Vector3.Transform(_points[i, j].Pv, rotationZ), rotationX);
+                    _points[i, j].NR = Vector3.Cross(_points[i, j].Pu, _points[i, j].Pv);
+                    //_points[i, j].NR = Vector3.Transform(Vector3.Transform(_points[i, j].N, rotationZ), rotationX);
                 }
             }
             return (rotationZ, rotationX);

@@ -127,17 +127,15 @@ namespace BezierSurface
         private void trackBarKD_Scroll(object sender, EventArgs e)
         {
             float value = (float)trackBarKD.Value / 100;
-            _drawingData.LightSParams.kd = value;
+            _drawingData.LightSParams.KD = value;
             textBoxKD.Text = value.ToString();
-            _drawingData.RecalculatePartialLightComputations();
             CanvasRedraw();
         }
 
         private void trackBarKS_Scroll(object sender, EventArgs e)
         {
             float value = (float)trackBarKS.Value / 100;
-            _drawingData.LightSParams.ks = value;
-            _drawingData.RecalculatePartialLightComputations();
+            _drawingData.LightSParams.KS = value;
             textBoxKS.Text = value.ToString();
             CanvasRedraw();
         }
@@ -145,8 +143,7 @@ namespace BezierSurface
         private void trackBarM_Scroll(object sender, EventArgs e)
         {
             float value = trackBarM.Value;
-            _drawingData.LightSParams.m = value;
-            _drawingData.RecalculatePartialLightComputations();
+            _drawingData.LightSParams.M = value;
             textBoxM.Text = value.ToString();
             CanvasRedraw();
         }
@@ -175,7 +172,6 @@ namespace BezierSurface
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 _drawingData.SurfaceColor.Color = dialog.Color;
-                _drawingData.RecalculatePartialLightComputations();
                 using (Graphics g = Graphics.FromImage(_surfaceColorBitmap))
                 {
                     g.Clear(_drawingData.SurfaceColor.Color);
@@ -192,7 +188,6 @@ namespace BezierSurface
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 _drawingData.LightS.Color = dialog.Color;
-                _drawingData.RecalculatePartialLightComputations();
                 using (Graphics g = Graphics.FromImage(_lightColorBitmap))
                 {
                     g.Clear(_drawingData.LightS.Color);

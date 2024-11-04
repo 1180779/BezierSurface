@@ -25,6 +25,7 @@ namespace Drawing.Bezier.Concrete
             {
                 PolygonFill.FillPolygon(triangle, bitmapData);
             }
+            //PolygonFill.FillPolygon(bs.Triangles[0], bitmapData);
         }
     }
 }

@@ -50,6 +50,14 @@ namespace Drawing.Filling
         {
             YMax = e.A.PR.Y > e.B.PR.Y ? e.A.PR.Y : e.B.PR.Y;
             XMin = e.A.PR.Y < e.B.PR.Y ? e.A.PR.X : e.B.PR.X;
+
+            //float numenator = (e.A.PR.X - e.B.PR.X);
+            //float denominator = (e.A.PR.Y - e.B.PR.Y);
+            //if (Math.Abs(numenator) < 0.1f)
+            //    numenator = 0.1f * Math.Sign(numenator);
+            //if (Math.Abs(denominator) < 0.1f)
+            //    denominator = 0.1f * Math.Sign(denominator);
+            //OneOverM = numenator / denominator;
             OneOverM = (e.A.PR.X - e.B.PR.X) / (e.A.PR.Y - e.B.PR.Y);
             X = XMin;
         }

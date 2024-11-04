@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Numerics;
+using System.ComponentModel;
 
 namespace Drawing.Lightning
 {
-    public interface ILightSource
+    public interface ILightSource : INotifyPropertyChanged
     {
         public Vector3 Location { get; set; }
         public Color Color { get; set; }

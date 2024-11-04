@@ -26,7 +26,7 @@ namespace Drawing.Lightning.Concrete
                 cosVR = 0;
 
             Vector3 color = bitmapData.PartialLightComputations.A * cosNL +
-                bitmapData.PartialLightComputations.B * (float)Math.Pow(cosVR, bitmapData.LightSParams.m);
+                bitmapData.PartialLightComputations.B * (float)Math.Pow(cosVR, bitmapData.LightSParams.M);
             for (int i = 0; i < 3; ++i)
             {
                 if (color[i] > 1f)

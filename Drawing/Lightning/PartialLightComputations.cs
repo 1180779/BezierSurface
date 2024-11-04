@@ -15,8 +15,8 @@ namespace Drawing.Lightning
         public void Recalculate(ObjectColor objC, LightParameters LightParams,ILightSource lightSource) 
         {
             Vector3 partial = objC.Color0To1 * lightSource.Color0To1;
-            A = LightParams.kd * partial;
-            B = LightParams.ks * partial;
+            A = LightParams.KD * partial;
+            B = LightParams.KS * partial;
         }
     }
 }
