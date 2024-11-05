@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Objects.RotationAndTriangulation;
 using Objects.Lightning;
+using System.Xml.Schema;
 
 namespace Drawing.Filling
 {
@@ -40,16 +41,30 @@ namespace Drawing.Filling
     {
         public float YMax { get; set; }
         public float XMin { get; set; }
+        public float XMax { get; set; }
         public float OneOverM { get; set; }
         public float X { get; set; }
         public void Update()
         {
             X += OneOverM;
         }
+        private Edge _E;
         public EdgeItem(Edge e) 
         {
-            YMax = e.A.PR.Y > e.B.PR.Y ? e.A.PR.Y : e.B.PR.Y;
-            XMin = e.A.PR.Y < e.B.PR.Y ? e.A.PR.X : e.B.PR.X;
+            _E = e;
+            YMax = e.A.PR.Y >= e.B.PR.Y ? e.A.PR.Y : e.B.PR.Y;
+            if (e.A.PR.Y <= e.B.PR.Y) 
+            {
+                XMin = e.A.PR.X;
+                XMax = e.B.PR.X;
+            }
+            else
+            {
+                XMin = e.B.PR.X;
+                XMax = e.A.PR.X;
+            }
+            //XMin = e.A.PR.Y <= e.B.PR.Y ? e.A.PR.X : e.B.PR.X;
+       
 
             //float numenator = (e.A.PR.X - e.B.PR.X);
             //float denominator = (e.A.PR.Y - e.B.PR.Y);

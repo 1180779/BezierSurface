@@ -31,6 +31,7 @@
             canvas = new PictureBox();
             groupBoxOptions = new GroupBox();
             groupBoxLight = new GroupBox();
+            buttonChooseNormalMap = new Button();
             checkBoxNormalBitmap = new CheckBox();
             checkBoxLightMoving = new CheckBox();
             textBoxParameter = new TextBox();
@@ -61,7 +62,8 @@
             groupBox1 = new GroupBox();
             trackBarTrianglesN = new TrackBar();
             textBoxTrianglesN = new TextBox();
-            buttonChooseNormalMap = new Button();
+            buttonTexture = new Button();
+            checkBoxTexture = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)canvas).BeginInit();
             groupBoxOptions.SuspendLayout();
             groupBoxLight.SuspendLayout();
@@ -110,6 +112,8 @@
             // 
             // groupBoxLight
             // 
+            groupBoxLight.Controls.Add(checkBoxTexture);
+            groupBoxLight.Controls.Add(buttonTexture);
             groupBoxLight.Controls.Add(buttonChooseNormalMap);
             groupBoxLight.Controls.Add(checkBoxNormalBitmap);
             groupBoxLight.Controls.Add(checkBoxLightMoving);
@@ -119,19 +123,29 @@
             groupBoxLight.Controls.Add(buttonLightColor);
             groupBoxLight.Location = new Point(6, 215);
             groupBoxLight.Name = "groupBoxLight";
-            groupBoxLight.Size = new Size(186, 220);
+            groupBoxLight.Size = new Size(186, 299);
             groupBoxLight.TabIndex = 22;
             groupBoxLight.TabStop = false;
             groupBoxLight.Text = "światło";
+            // 
+            // buttonChooseNormalMap
+            // 
+            buttonChooseNormalMap.Location = new Point(6, 178);
+            buttonChooseNormalMap.Name = "buttonChooseNormalMap";
+            buttonChooseNormalMap.Size = new Size(94, 29);
+            buttonChooseNormalMap.TabIndex = 13;
+            buttonChooseNormalMap.Text = "wybierz teksturę";
+            buttonChooseNormalMap.UseVisualStyleBackColor = true;
+            buttonChooseNormalMap.Click += buttonChooseNormalMap_Click;
             // 
             // checkBoxNormalBitmap
             // 
             checkBoxNormalBitmap.AutoSize = true;
             checkBoxNormalBitmap.Location = new Point(9, 148);
             checkBoxNormalBitmap.Name = "checkBoxNormalBitmap";
-            checkBoxNormalBitmap.Size = new Size(83, 24);
+            checkBoxNormalBitmap.Size = new Size(120, 24);
             checkBoxNormalBitmap.TabIndex = 12;
-            checkBoxNormalBitmap.Text = "tekstura";
+            checkBoxNormalBitmap.Text = "normal mapa";
             checkBoxNormalBitmap.UseVisualStyleBackColor = true;
             checkBoxNormalBitmap.CheckedChanged += checkBoxNormalBitmap_CheckedChanged;
             // 
@@ -424,15 +438,24 @@
             textBoxTrianglesN.Size = new Size(50, 27);
             textBoxTrianglesN.TabIndex = 1;
             // 
-            // buttonChooseNormalMap
+            // buttonTexture
             // 
-            buttonChooseNormalMap.Location = new Point(6, 178);
-            buttonChooseNormalMap.Name = "buttonChooseNormalMap";
-            buttonChooseNormalMap.Size = new Size(94, 29);
-            buttonChooseNormalMap.TabIndex = 13;
-            buttonChooseNormalMap.Text = "wybierz teksturę";
-            buttonChooseNormalMap.UseVisualStyleBackColor = true;
-            buttonChooseNormalMap.Click += buttonChooseNormalMap_Click;
+            buttonTexture.Location = new Point(6, 243);
+            buttonTexture.Name = "buttonTexture";
+            buttonTexture.Size = new Size(94, 29);
+            buttonTexture.TabIndex = 14;
+            buttonTexture.Text = "wybierz teksturę";
+            buttonTexture.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTexture
+            // 
+            checkBoxTexture.AutoSize = true;
+            checkBoxTexture.Location = new Point(9, 213);
+            checkBoxTexture.Name = "checkBoxTexture";
+            checkBoxTexture.Size = new Size(83, 24);
+            checkBoxTexture.TabIndex = 15;
+            checkBoxTexture.Text = "tekstura";
+            checkBoxTexture.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -511,5 +534,7 @@
         private CheckBox checkBoxLightMoving;
         private CheckBox checkBoxNormalBitmap;
         private Button buttonChooseNormalMap;
+        private CheckBox checkBoxTexture;
+        private Button buttonTexture;
     }
 }

@@ -36,6 +36,7 @@ namespace Drawing
                 NormalMap = new Bitmap(normalMapFile);
             
         }
+        public Bitmap Texture { get; set; }
         public Bitmap NormalMap { get; set; }
         public int AdjX { get; set; }
         public int AdjY { get; set; }
@@ -54,6 +55,14 @@ namespace Drawing
             if (!File.Exists(filePath))
                 return false;
             NormalMap = new Bitmap(filePath);
+            return true;
+        }
+
+        public bool ChangeTexture(string filePath)
+        {
+            if (!File.Exists(filePath))
+                return false;
+            Texture = new Bitmap(filePath);
             return true;
         }
     }

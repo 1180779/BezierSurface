@@ -1,4 +1,5 @@
-﻿using Objects.RotationAndTriangulation;
+﻿using Objects.Bezier.Extensions;
+using Objects.RotationAndTriangulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,15 +32,10 @@ namespace Drawing.Lightning.Concrete
                 (int)(u * (bitmapData.NormalMap.Width - 1)),
                 (int)(v * (bitmapData.NormalMap.Height - 1)) );
             Vector3 coef = new Vector3(mapC.R, mapC.G, mapC.B);
-            for(int i = 0; i < 3; ++i)
-            {
-                if (coef[i] > 127f)
-                    coef[i] = (coef[i] - 127f) / 128f;
-                else if (coef[i] < 127f)
-                    coef[i] = -coef[i] / 127f;
-                else
-                    coef[i] = 0f;
-            }
+            coef.X = (coef.X / 255) * 2f - 1;
+            coef.Y = (coef.Y / 255) * 2f - 1;
+            coef.Z = (coef.Z  - 128) / 127;
+           
             Vector4 Nres = Vector4.Transform(new Vector4(coef.X, coef.Y, coef.Z, 0), matrix);
             N = new Vector3(Nres.X, Nres.Y, Nres.Z);
 

@@ -62,7 +62,14 @@ namespace Drawing.Filling.Concrete
                 // TO DO: popraw na poprawną implementacją ze światłem etc.
                 // wypełnij piksele pomiędzy parami przecięć
                 if (AET.Edges.Count == 1)
-                { }
+                {
+                    ScanDraw.DrawScan(
+                        (int)AET.Edges[0].X,
+                        (int)AET.Edges[0].X,
+                        i,
+                        t,
+                        bitmapData);
+                }
                 else if(AET.Edges.Count == 3)
                 {
                     ScanDraw.DrawScan(
@@ -86,7 +93,7 @@ namespace Drawing.Filling.Concrete
                 }
 
                 // usuń z AET te elementy, dla których y = ymax
-                AET.Edges.RemoveAll(e => (int)e.YMax == i);
+                AET.Edges.RemoveAll(e => (int)e.YMax == i); 
 
                 // zwiększ y o 1 (przejście do następnej scan-linii)
                 ++i;
@@ -94,6 +101,14 @@ namespace Drawing.Filling.Concrete
                 // dla każdej krawędzi w AET 
                 // uaktualnij x dla nowej scanlinii y(x+= 1 / m)
                 AET.Update();
+
+                //AET.Edges.ForEach(e =>
+                //{
+                //    if (e.X < e.XMin)
+                //        e.X = e.XMin;
+                //    else if (e.X > e.XMax)
+                //        e.X = e.XMax;
+                //});
             }
         }
     }
