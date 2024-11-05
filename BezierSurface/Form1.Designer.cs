@@ -31,6 +31,8 @@
             canvas = new PictureBox();
             groupBoxOptions = new GroupBox();
             groupBoxLight = new GroupBox();
+            checkBoxTexture = new CheckBox();
+            buttonTexture = new Button();
             buttonChooseNormalMap = new Button();
             checkBoxNormalBitmap = new CheckBox();
             checkBoxLightMoving = new CheckBox();
@@ -62,8 +64,6 @@
             groupBox1 = new GroupBox();
             trackBarTrianglesN = new TrackBar();
             textBoxTrianglesN = new TextBox();
-            buttonTexture = new Button();
-            checkBoxTexture = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)canvas).BeginInit();
             groupBoxOptions.SuspendLayout();
             groupBoxLight.SuspendLayout();
@@ -127,6 +127,27 @@
             groupBoxLight.TabIndex = 22;
             groupBoxLight.TabStop = false;
             groupBoxLight.Text = "światło";
+            // 
+            // checkBoxTexture
+            // 
+            checkBoxTexture.AutoSize = true;
+            checkBoxTexture.Location = new Point(9, 213);
+            checkBoxTexture.Name = "checkBoxTexture";
+            checkBoxTexture.Size = new Size(83, 24);
+            checkBoxTexture.TabIndex = 15;
+            checkBoxTexture.Text = "tekstura";
+            checkBoxTexture.UseVisualStyleBackColor = true;
+            checkBoxTexture.CheckedChanged += checkBoxTexture_CheckedChanged;
+            // 
+            // buttonTexture
+            // 
+            buttonTexture.Location = new Point(6, 243);
+            buttonTexture.Name = "buttonTexture";
+            buttonTexture.Size = new Size(94, 29);
+            buttonTexture.TabIndex = 14;
+            buttonTexture.Text = "wybierz teksturę";
+            buttonTexture.UseVisualStyleBackColor = true;
+            buttonTexture.Click += buttonTexture_Click;
             // 
             // buttonChooseNormalMap
             // 
@@ -437,25 +458,6 @@
             textBoxTrianglesN.Name = "textBoxTrianglesN";
             textBoxTrianglesN.Size = new Size(50, 27);
             textBoxTrianglesN.TabIndex = 1;
-            // 
-            // buttonTexture
-            // 
-            buttonTexture.Location = new Point(6, 243);
-            buttonTexture.Name = "buttonTexture";
-            buttonTexture.Size = new Size(94, 29);
-            buttonTexture.TabIndex = 14;
-            buttonTexture.Text = "wybierz teksturę";
-            buttonTexture.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxTexture
-            // 
-            checkBoxTexture.AutoSize = true;
-            checkBoxTexture.Location = new Point(9, 213);
-            checkBoxTexture.Name = "checkBoxTexture";
-            checkBoxTexture.Size = new Size(83, 24);
-            checkBoxTexture.TabIndex = 15;
-            checkBoxTexture.Text = "tekstura";
-            checkBoxTexture.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

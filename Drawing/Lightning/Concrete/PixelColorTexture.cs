@@ -25,13 +25,19 @@ namespace Drawing.Lightning.Concrete
             if (cosVR < 0)
                 cosVR = 0;
 
+            float u = Math.Max(0, Math.Min(1f, lambda.X * t.A.U + lambda.Y * t.B.U + lambda.Z * t.C.U));
+            float v = Math.Max(0, Math.Min(1f, lambda.X * t.A.V + lambda.Y * t.B.V + lambda.Z * t.C.V));
             // add color from texture
-            Vector3 color = bitmapData.PartialLightComputations.ATexture * cosNL +
-                bitmapData.PartialLightComputations.BTexture * (float)Math.Pow(cosVR, bitmapData.LightSParams.M);
-            for (int i = 0; i < 3; ++i)
+            var (i, j) = ((int) (u * (bitmapData.Texture.Width - 1)), 
+                (int)(v * (bitmapData.Texture.Width - 1)) );
+            Vector3 color = bitmapData.PartialLightComputations.ATexture * bitmapData.TexturePreprocessed[i, j] * cosNL +
+                bitmapData.PartialLightComputations.BTexture * bitmapData.TexturePreprocessed[i, j] * 
+                (float)Math.Pow(cosVR, bitmapData.LightSParams.M);
+
+            for (int k = 0; k < 3; ++k)
             {
-                if (color[i] > 1f)
-                    color[i] = 1f;
+                if (color[k] > 1f)
+                    color[k] = 1f;
             }
             Color c = Color.FromArgb((int)(color[0] * 255), (int)(color[1] * 255), (int)(color[2] * 255));
 

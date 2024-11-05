@@ -32,25 +32,35 @@ namespace Drawing
             BezierDraw = new BezierDrawRotation(
                 new VertexDrawRotation(new LibraryVector3Draw()), 
                 lineDraw);
-
-            TriangleDraw = new TriangleDrawRotation(
-                new LibraryVector3Draw(1), 
-                lineDraw);
-
             SurfaceTrianglesDraw = new TriangulatedBezierDraw(
-                TriangleDraw);
+                new TriangleDrawRotation(new LibraryVector3Draw(1), lineDraw));
 
             _surfaceDraw = new TriangulatedBezierDrawLit(
                 new BucketPolygonFill(new ScanDraw(new PixelColor())));
+            _surfaceDrawTexture = new TriangulatedBezierDrawLit(
+               new BucketPolygonFill(new ScanDraw(new PixelColorTexture())));
             _surfaceDrawNormalMap = new TriangulatedBezierDrawLit(
                 new BucketPolygonFill(new ScanDraw(new PixelColorNormalMap())));
             SurfaceDraw = _surfaceDraw;
         }
         private static ITriangulatedBezierDraw _surfaceDraw;
         private static ITriangulatedBezierDraw _surfaceDrawNormalMap;
+        private static ITriangulatedBezierDraw _surfaceDrawTexture;
+        private static ITriangulatedBezierDraw _surfaceDrawTextureNormalMap;
 
+        private static bool _textureOn = false;
+        public static bool TextureOn 
+        { 
+            get { return _textureOn; } 
+            set 
+            {
+                if (_textureOn == value)
+                    return;
+                _textureOn = value;
+                UpdateSurfaceDrawing();
+            } 
+        }
         private static bool _normalBitmapOn = false;
-
         public static bool NormalBitmapOn
         {
             get { return _normalBitmapOn; }
@@ -59,12 +69,28 @@ namespace Drawing
                 if (_normalBitmapOn == value)
                     return;
                 _normalBitmapOn = value;
-                if (value)
-                    SurfaceDraw = _surfaceDrawNormalMap;
-                else
-                    SurfaceDraw = _surfaceDraw;
+                UpdateSurfaceDrawing();
             }
 
+        }
+        private static void UpdateSurfaceDrawing()
+        {
+            if (_normalBitmapOn && _textureOn)
+            {
+                // TO DO: add
+            }
+            else if (_normalBitmapOn && !_textureOn) 
+            {
+                SurfaceDraw = _surfaceDrawNormalMap;
+            }
+            else if (!_normalBitmapOn && _textureOn)
+            {
+                SurfaceDraw = _surfaceDrawTexture;
+            }
+            else
+            {
+                SurfaceDraw = _surfaceDraw;
+            }
         }
         public static ILightSource LightSource { get; private set; }
         public static  ITriangulatedBezierDraw SurfaceDraw { get; private set; }

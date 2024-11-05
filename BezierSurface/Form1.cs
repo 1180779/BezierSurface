@@ -63,6 +63,9 @@ namespace BezierSurface
 
             checkBoxLightMoving.Checked = _drawingData.LightS.IsMoving;
 
+            checkBoxNormalBitmap.Checked = DrawingObject.NormalBitmapOn;
+            checkBoxTexture.Checked = DrawingObject.TextureOn;
+
             //CanvasRedraw();
 
             // select surface color
@@ -299,13 +302,39 @@ namespace BezierSurface
         private void buttonChooseNormalMap_Click(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog();
-            if (dialog.ShowDialog() == DialogResult.OK) 
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
                 lock (_drawingDataLock)
                 {
-                    _drawingData.ChangeNormalMap(dialog.FileName);
+                    if (!_drawingData.ChangeNormalMap(dialog.FileName))
+                        throw new Exception();
                 }
             }
         }
+        private void checkBoxTexture_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxTexture.Checked)
+            {
+                DrawingObject.TextureOn = true;
+            }
+            else
+            {
+                DrawingObject.TextureOn = false;
+            }
+        }
+
+        private void buttonTexture_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                lock (_drawingDataLock)
+                {
+                    if (!_drawingData.ChangeTexture(dialog.FileName))
+                        throw new Exception();
+                }
+            }
+        }
+
     }
 }

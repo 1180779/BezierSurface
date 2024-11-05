@@ -13,7 +13,8 @@ namespace Drawing
 {
     public class DrawingData
     {
-        public DrawingData(DirectBitmap dbitmap, int adjX, int adjY, object configLock, string normalMapFile = "")
+        public DrawingData(DirectBitmap dbitmap, int adjX, int adjY, object configLock, 
+            string normalMapFile = "", string textureFile = "")
         {
             DBitmap = dbitmap;
             AdjX = adjX;
@@ -33,10 +34,13 @@ namespace Drawing
             RecalculatePartialLightComputations(null, new PropertyChangedEventArgs(""));
 
             if (normalMapFile != "")
-                NormalMap = new Bitmap(normalMapFile);
+                ChangeNormalMap(normalMapFile);
+            if(textureFile != "")
+                ChangeTexture(textureFile);
             
         }
         public Bitmap Texture { get; set; }
+        public Vector3[,] TexturePreprocessed { get; set; }
         public Bitmap NormalMap { get; set; }
         public int AdjX { get; set; }
         public int AdjY { get; set; }
@@ -63,6 +67,19 @@ namespace Drawing
             if (!File.Exists(filePath))
                 return false;
             Texture = new Bitmap(filePath);
+            TexturePreprocessed = new Vector3[Texture.Width, Texture.Height];
+            Color c;
+            for(int i = 0; i < Texture.Width; ++i)
+            {
+                for(int j = 0; j < Texture.Height; ++j)
+                {
+                    c = Texture.GetPixel(i, j);
+                    TexturePreprocessed[i, j] = new Vector3(
+                        c.R / 255,
+                        c.G / 255,
+                        c.B / 255);
+                }
+            }
             return true;
         }
     }
