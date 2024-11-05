@@ -31,6 +31,7 @@
             canvas = new PictureBox();
             groupBoxOptions = new GroupBox();
             groupBoxLight = new GroupBox();
+            checkBoxNormalBitmap = new CheckBox();
             checkBoxLightMoving = new CheckBox();
             textBoxParameter = new TextBox();
             trackBarParameter = new TrackBar();
@@ -60,6 +61,7 @@
             groupBox1 = new GroupBox();
             trackBarTrianglesN = new TrackBar();
             textBoxTrianglesN = new TextBox();
+            buttonChooseNormalMap = new Button();
             ((System.ComponentModel.ISupportInitialize)canvas).BeginInit();
             groupBoxOptions.SuspendLayout();
             groupBoxLight.SuspendLayout();
@@ -108,6 +110,8 @@
             // 
             // groupBoxLight
             // 
+            groupBoxLight.Controls.Add(buttonChooseNormalMap);
+            groupBoxLight.Controls.Add(checkBoxNormalBitmap);
             groupBoxLight.Controls.Add(checkBoxLightMoving);
             groupBoxLight.Controls.Add(textBoxParameter);
             groupBoxLight.Controls.Add(trackBarParameter);
@@ -115,10 +119,21 @@
             groupBoxLight.Controls.Add(buttonLightColor);
             groupBoxLight.Location = new Point(6, 215);
             groupBoxLight.Name = "groupBoxLight";
-            groupBoxLight.Size = new Size(186, 171);
+            groupBoxLight.Size = new Size(186, 220);
             groupBoxLight.TabIndex = 22;
             groupBoxLight.TabStop = false;
             groupBoxLight.Text = "światło";
+            // 
+            // checkBoxNormalBitmap
+            // 
+            checkBoxNormalBitmap.AutoSize = true;
+            checkBoxNormalBitmap.Location = new Point(9, 148);
+            checkBoxNormalBitmap.Name = "checkBoxNormalBitmap";
+            checkBoxNormalBitmap.Size = new Size(83, 24);
+            checkBoxNormalBitmap.TabIndex = 12;
+            checkBoxNormalBitmap.Text = "tekstura";
+            checkBoxNormalBitmap.UseVisualStyleBackColor = true;
+            checkBoxNormalBitmap.CheckedChanged += checkBoxNormalBitmap_CheckedChanged;
             // 
             // checkBoxLightMoving
             // 
@@ -409,6 +424,16 @@
             textBoxTrianglesN.Size = new Size(50, 27);
             textBoxTrianglesN.TabIndex = 1;
             // 
+            // buttonChooseNormalMap
+            // 
+            buttonChooseNormalMap.Location = new Point(6, 178);
+            buttonChooseNormalMap.Name = "buttonChooseNormalMap";
+            buttonChooseNormalMap.Size = new Size(94, 29);
+            buttonChooseNormalMap.TabIndex = 13;
+            buttonChooseNormalMap.Text = "wybierz teksturę";
+            buttonChooseNormalMap.UseVisualStyleBackColor = true;
+            buttonChooseNormalMap.Click += buttonChooseNormalMap_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -484,5 +509,7 @@
         private TextBox textBoxParameter;
         private TrackBar trackBarParameter;
         private CheckBox checkBoxLightMoving;
+        private CheckBox checkBoxNormalBitmap;
+        private Button buttonChooseNormalMap;
     }
 }

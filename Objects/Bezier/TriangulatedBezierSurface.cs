@@ -50,6 +50,8 @@ namespace Objects.Bezier
                     for (float v = 0f; v <= 1f + step / 2; v += step, ++j)
                     {
                         _points[i, j] = new Vertex();
+                        _points[i, j].U = u;
+                        _points[i, j].V = v;
                         _points[i, j].P = P(u, v);
                         _points[i, j].Pu = Pu(u, v);
                         _points[i, j].Pv = Pv(u, v);

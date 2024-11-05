@@ -41,7 +41,7 @@ namespace BezierSurface
             _dbitmap = new DirectBitmap(canvas.Width, canvas.Height);
             canvas.Image = _dbitmap.Bitmap;
 
-            _drawingData = new(_dbitmap, canvas.Width / 2, canvas.Height / 2, _drawingDataLock);
+            _drawingData = new(_dbitmap, canvas.Width / 2, canvas.Height / 2, _drawingDataLock, "./normalMap1.png");
             _drawingData.Pen = Pens.Black;
             _drawingData.Brush = Brushes.Green;
 
@@ -274,13 +274,37 @@ namespace BezierSurface
 
         private void checkBoxLightMoving_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxLightMoving.Checked) 
+            if (checkBoxLightMoving.Checked)
             {
                 _drawingData.LightS.StartMoving();
             }
             else
             {
                 _drawingData.LightS.StopMoving();
+            }
+        }
+
+        private void checkBoxNormalBitmap_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxNormalBitmap.Checked)
+            {
+                DrawingObject.NormalBitmapOn = true;
+            }
+            else
+            {
+                DrawingObject.NormalBitmapOn = false;
+            }
+        }
+
+        private void buttonChooseNormalMap_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK) 
+            {
+                lock (_drawingDataLock)
+                {
+                    _drawingData.ChangeNormalMap(dialog.FileName);
+                }
             }
         }
     }

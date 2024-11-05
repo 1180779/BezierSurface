@@ -13,7 +13,7 @@ namespace Drawing
 {
     public class DrawingData
     {
-        public DrawingData(DirectBitmap dbitmap, int adjX, int adjY, object configLock)
+        public DrawingData(DirectBitmap dbitmap, int adjX, int adjY, object configLock, string normalMapFile = "")
         {
             DBitmap = dbitmap;
             AdjX = adjX;
@@ -31,7 +31,12 @@ namespace Drawing
             SurfaceColor.PropertyChanged += RecalculatePartialLightComputations;
 
             RecalculatePartialLightComputations(null, new PropertyChangedEventArgs(""));
+
+            if (normalMapFile != "")
+                NormalMap = new Bitmap(normalMapFile);
+            
         }
+        public Bitmap NormalMap { get; set; }
         public int AdjX { get; set; }
         public int AdjY { get; set; }
         public DirectBitmap DBitmap { get; set; }
@@ -44,5 +49,12 @@ namespace Drawing
         public PartialLightComputations PartialLightComputations;
         public void RecalculatePartialLightComputations(Object? sender, PropertyChangedEventArgs e) 
             => PartialLightComputations.Recalculate(SurfaceColor, LightSParams, LightS);
+        public bool ChangeNormalMap(string filePath)
+        {
+            if (!File.Exists(filePath))
+                return false;
+            NormalMap = new Bitmap(filePath);
+            return true;
+        }
     }
 }

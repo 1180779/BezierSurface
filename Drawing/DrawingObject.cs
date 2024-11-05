@@ -17,6 +17,7 @@ using System.Numerics;
 using Drawing.Lightning;
 using Drawing.Lightning.Concrete;
 using Drawing.Filling.Concrete;
+using Drawing.Filling;
 
 namespace Drawing
 {
@@ -36,22 +37,45 @@ namespace Drawing
                 new LibraryVector3Draw(1), 
                 lineDraw);
 
-            SUrfaceTrianglesDraw = new TriangulatedBezierDraw(
+            SurfaceTrianglesDraw = new TriangulatedBezierDraw(
                 TriangleDraw);
 
-            SurfaceDraw = new TriangulatedBezierDrawLit(
+            _surfaceDraw = new TriangulatedBezierDrawLit(
                 new BucketPolygonFill(new ScanDraw(new PixelColor())));
+            _surfaceDrawNormalMap = new TriangulatedBezierDrawLit(
+                new BucketPolygonFill(new ScanDraw(new PixelColorNormalMap())));
+            SurfaceDraw = _surfaceDraw;
+        }
+        private static ITriangulatedBezierDraw _surfaceDraw;
+        private static ITriangulatedBezierDraw _surfaceDrawNormalMap;
+
+        private static bool _normalBitmapOn = false;
+
+        public static bool NormalBitmapOn
+        {
+            get { return _normalBitmapOn; }
+            set 
+            {
+                if (_normalBitmapOn == value)
+                    return;
+                _normalBitmapOn = value;
+                if (value)
+                    SurfaceDraw = _surfaceDrawNormalMap;
+                else
+                    SurfaceDraw = _surfaceDraw;
+            }
+
         }
         public static ILightSource LightSource { get; private set; }
         public static  ITriangulatedBezierDraw SurfaceDraw { get; private set; }
-        public static ITriangulatedBezierDraw SUrfaceTrianglesDraw { get; private set; }
+        public static ITriangulatedBezierDraw SurfaceTrianglesDraw { get; private set; }
         public static IBezierDraw BezierDraw { get; private set; }
         public static ITriangleDraw TriangleDraw { get; private set; }
 
         public static void DrawSurface(TriangulatedBezierSurface bs, DrawingData bitmapData) 
             => SurfaceDraw.Draw(bs, bitmapData);
         public static void DrawTriangulatedBezier(TriangulatedBezierSurface bs, DrawingData bitmapData)
-            => SUrfaceTrianglesDraw.Draw(bs, bitmapData);
+            => SurfaceTrianglesDraw.Draw(bs, bitmapData);
         public static void DrawBezier(BezierSufrace b, DrawingData bitmapData)
             => BezierDraw.DrawBezier(b, bitmapData);
         public static void DrawTriangle(Triangle t, DrawingData bitmapData)

@@ -11,6 +11,8 @@ namespace Objects.RotationAndTriangulation
 {
     public class Vertex
     {
+        public float U {  get; set; }
+        public float V { get; set; }
         // before rotation
         public Vector3 P { get; set; } // point BEFORE rotation
         public Vector3 Pu { get; set; } // tangent vector along the u constant parameter line BEFORE rotation
