@@ -41,6 +41,8 @@ namespace Drawing
                new BucketPolygonFill(new ScanDraw(new PixelColorTexture())));
             _surfaceDrawNormalMap = new TriangulatedBezierDrawLit(
                 new BucketPolygonFill(new ScanDraw(new PixelColorNormalMap())));
+            _surfaceDrawTextureNormalMap = new TriangulatedBezierDrawLit(
+                new BucketPolygonFill(new ScanDraw(new PixelColorTextureNormalMap())));
             SurfaceDraw = _surfaceDraw;
         }
         private static ITriangulatedBezierDraw _surfaceDraw;
@@ -77,7 +79,7 @@ namespace Drawing
         {
             if (_normalBitmapOn && _textureOn)
             {
-                // TO DO: add
+                SurfaceDraw = _surfaceDrawTextureNormalMap;
             }
             else if (_normalBitmapOn && !_textureOn) 
             {

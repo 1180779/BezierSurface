@@ -24,7 +24,7 @@ namespace Drawing
             LightSParams.PropertyChanged += RecalculatePartialLightComputations;
 
             //LightS = new LightSource(new Vector3(0, 0, 100), Color.White); // new Vector3(-100, -1000, 0)
-            LightS = new MovingLightSource(new Vector3(0, 0, 400), Color.White, configLock); // new Vector3(-100, -1000, 0)
+            LightS = new MovingLightSource(new Vector3(0, 0, -400), Color.White, configLock); // new Vector3(-100, -1000, 0)
             LightS.StartMoving();
             LightS.PropertyChanged += RecalculatePartialLightComputations;
 
@@ -75,9 +75,9 @@ namespace Drawing
                 {
                     c = Texture.GetPixel(i, j);
                     TexturePreprocessed[i, j] = new Vector3(
-                        c.R / 255,
-                        c.G / 255,
-                        c.B / 255);
+                        c.R / 255f,
+                        c.G / 255f,
+                        c.B / 255f);
                 }
             }
             return true;

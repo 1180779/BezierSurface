@@ -41,7 +41,11 @@ namespace BezierSurface
             _dbitmap = new DirectBitmap(canvas.Width, canvas.Height);
             canvas.Image = _dbitmap.Bitmap;
 
-            _drawingData = new(_dbitmap, canvas.Width / 2, canvas.Height / 2, _drawingDataLock, "./normalMap1.png");
+            _drawingData = new(_dbitmap, canvas.Width / 2, canvas.Height / 2, _drawingDataLock, 
+                "./normalMap1.png", "./texture.jpeg");
+            labelNormalMap.Text = "./normalMap1.png";
+            labelTexture.Text = "./texture.jpeg";
+
             _drawingData.Pen = Pens.Black;
             _drawingData.Brush = Brushes.Green;
 
@@ -308,6 +312,7 @@ namespace BezierSurface
                 {
                     if (!_drawingData.ChangeNormalMap(dialog.FileName))
                         throw new Exception();
+                    labelNormalMap.Text = dialog.FileName;
                 }
             }
         }
@@ -332,6 +337,7 @@ namespace BezierSurface
                 {
                     if (!_drawingData.ChangeTexture(dialog.FileName))
                         throw new Exception();
+                    labelTexture.Text = dialog.FileName;
                 }
             }
         }

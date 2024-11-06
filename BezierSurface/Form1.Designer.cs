@@ -31,6 +31,8 @@
             canvas = new PictureBox();
             groupBoxOptions = new GroupBox();
             groupBoxLight = new GroupBox();
+            labelTexture = new Label();
+            labelNormalMap = new Label();
             checkBoxTexture = new CheckBox();
             buttonTexture = new Button();
             buttonChooseNormalMap = new Button();
@@ -64,6 +66,8 @@
             groupBox1 = new GroupBox();
             trackBarTrianglesN = new TrackBar();
             textBoxTrianglesN = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)canvas).BeginInit();
             groupBoxOptions.SuspendLayout();
             groupBoxLight.SuspendLayout();
@@ -105,7 +109,7 @@
             groupBoxOptions.Controls.Add(groupBox1);
             groupBoxOptions.Location = new Point(670, 12);
             groupBoxOptions.Name = "groupBoxOptions";
-            groupBoxOptions.Size = new Size(454, 547);
+            groupBoxOptions.Size = new Size(512, 564);
             groupBoxOptions.TabIndex = 1;
             groupBoxOptions.TabStop = false;
             groupBoxOptions.Text = "Opcje";
@@ -121,17 +125,35 @@
             groupBoxLight.Controls.Add(trackBarParameter);
             groupBoxLight.Controls.Add(pictureBoxLightColor);
             groupBoxLight.Controls.Add(buttonLightColor);
-            groupBoxLight.Location = new Point(6, 215);
+            groupBoxLight.Location = new Point(6, 210);
             groupBoxLight.Name = "groupBoxLight";
-            groupBoxLight.Size = new Size(186, 299);
+            groupBoxLight.Size = new Size(244, 348);
             groupBoxLight.TabIndex = 22;
             groupBoxLight.TabStop = false;
-            groupBoxLight.Text = "światło";
+            groupBoxLight.Text = "światło i kolor";
+            // 
+            // labelTexture
+            // 
+            labelTexture.AutoSize = true;
+            labelTexture.Location = new Point(126, 554);
+            labelTexture.Name = "labelTexture";
+            labelTexture.Size = new Size(50, 20);
+            labelTexture.TabIndex = 17;
+            labelTexture.Text = "label2";
+            // 
+            // labelNormalMap
+            // 
+            labelNormalMap.AutoSize = true;
+            labelNormalMap.Location = new Point(126, 524);
+            labelNormalMap.Name = "labelNormalMap";
+            labelNormalMap.Size = new Size(50, 20);
+            labelNormalMap.TabIndex = 16;
+            labelNormalMap.Text = "label1";
             // 
             // checkBoxTexture
             // 
             checkBoxTexture.AutoSize = true;
-            checkBoxTexture.Location = new Point(9, 213);
+            checkBoxTexture.Location = new Point(8, 180);
             checkBoxTexture.Name = "checkBoxTexture";
             checkBoxTexture.Size = new Size(83, 24);
             checkBoxTexture.TabIndex = 15;
@@ -141,7 +163,7 @@
             // 
             // buttonTexture
             // 
-            buttonTexture.Location = new Point(6, 243);
+            buttonTexture.Location = new Point(129, 180);
             buttonTexture.Name = "buttonTexture";
             buttonTexture.Size = new Size(94, 29);
             buttonTexture.TabIndex = 14;
@@ -151,7 +173,7 @@
             // 
             // buttonChooseNormalMap
             // 
-            buttonChooseNormalMap.Location = new Point(6, 178);
+            buttonChooseNormalMap.Location = new Point(128, 145);
             buttonChooseNormalMap.Name = "buttonChooseNormalMap";
             buttonChooseNormalMap.Size = new Size(94, 29);
             buttonChooseNormalMap.TabIndex = 13;
@@ -162,7 +184,7 @@
             // checkBoxNormalBitmap
             // 
             checkBoxNormalBitmap.AutoSize = true;
-            checkBoxNormalBitmap.Location = new Point(9, 148);
+            checkBoxNormalBitmap.Location = new Point(9, 150);
             checkBoxNormalBitmap.Name = "checkBoxNormalBitmap";
             checkBoxNormalBitmap.Size = new Size(120, 24);
             checkBoxNormalBitmap.TabIndex = 12;
@@ -201,7 +223,7 @@
             // 
             // pictureBoxLightColor
             // 
-            pictureBoxLightColor.Location = new Point(126, 26);
+            pictureBoxLightColor.Location = new Point(129, 26);
             pictureBoxLightColor.Name = "pictureBoxLightColor";
             pictureBoxLightColor.Size = new Size(54, 55);
             pictureBoxLightColor.TabIndex = 5;
@@ -224,16 +246,16 @@
             groupBoxSurface.Controls.Add(checkBoxDrawSurface);
             groupBoxSurface.Controls.Add(checkBoxDrawTriangles);
             groupBoxSurface.Controls.Add(checkBoxDrawControls);
-            groupBoxSurface.Location = new Point(6, 31);
+            groupBoxSurface.Location = new Point(6, 26);
             groupBoxSurface.Name = "groupBoxSurface";
-            groupBoxSurface.Size = new Size(186, 178);
+            groupBoxSurface.Size = new Size(244, 178);
             groupBoxSurface.TabIndex = 21;
             groupBoxSurface.TabStop = false;
             groupBoxSurface.Text = "opcje powierzchni";
             // 
             // pictureBoxSurfaceColor
             // 
-            pictureBoxSurfaceColor.Location = new Point(126, 116);
+            pictureBoxSurfaceColor.Location = new Point(129, 116);
             pictureBoxSurfaceColor.Name = "pictureBoxSurfaceColor";
             pictureBoxSurfaceColor.Size = new Size(54, 55);
             pictureBoxSurfaceColor.TabIndex = 4;
@@ -286,9 +308,9 @@
             // 
             groupBoxM.Controls.Add(trackBarM);
             groupBoxM.Controls.Add(textBoxM);
-            groupBoxM.Location = new Point(198, 449);
+            groupBoxM.Location = new Point(256, 458);
             groupBoxM.Name = "groupBoxM";
-            groupBoxM.Size = new Size(250, 80);
+            groupBoxM.Size = new Size(250, 82);
             groupBoxM.TabIndex = 20;
             groupBoxM.TabStop = false;
             groupBoxM.Text = "współczynnik m";
@@ -316,7 +338,7 @@
             // 
             groupBoxKS.Controls.Add(trackBarKS);
             groupBoxKS.Controls.Add(textBoxKS);
-            groupBoxKS.Location = new Point(198, 363);
+            groupBoxKS.Location = new Point(256, 370);
             groupBoxKS.Name = "groupBoxKS";
             groupBoxKS.Size = new Size(250, 80);
             groupBoxKS.TabIndex = 19;
@@ -345,7 +367,7 @@
             // 
             groupBoxKD.Controls.Add(trackBarKD);
             groupBoxKD.Controls.Add(textBoxKD);
-            groupBoxKD.Location = new Point(198, 275);
+            groupBoxKD.Location = new Point(256, 284);
             groupBoxKD.Name = "groupBoxKD";
             groupBoxKD.Size = new Size(250, 80);
             groupBoxKD.TabIndex = 18;
@@ -374,7 +396,7 @@
             // 
             groupBoxBeta.Controls.Add(trackBarBeta);
             groupBoxBeta.Controls.Add(textBoxBeta);
-            groupBoxBeta.Location = new Point(198, 189);
+            groupBoxBeta.Location = new Point(256, 198);
             groupBoxBeta.Name = "groupBoxBeta";
             groupBoxBeta.Size = new Size(250, 80);
             groupBoxBeta.TabIndex = 17;
@@ -403,7 +425,7 @@
             // 
             groupBoxAlpha.Controls.Add(trackBarAlpha);
             groupBoxAlpha.Controls.Add(textBoxAlpha);
-            groupBoxAlpha.Location = new Point(198, 103);
+            groupBoxAlpha.Location = new Point(256, 112);
             groupBoxAlpha.Name = "groupBoxAlpha";
             groupBoxAlpha.Size = new Size(250, 80);
             groupBoxAlpha.TabIndex = 16;
@@ -433,7 +455,7 @@
             // 
             groupBox1.Controls.Add(trackBarTrianglesN);
             groupBox1.Controls.Add(textBoxTrianglesN);
-            groupBox1.Location = new Point(198, 17);
+            groupBox1.Location = new Point(256, 26);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(250, 80);
             groupBox1.TabIndex = 15;
@@ -459,11 +481,33 @@
             textBoxTrianglesN.Size = new Size(50, 27);
             textBoxTrianglesN.TabIndex = 1;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 524);
+            label1.Name = "label1";
+            label1.Size = new Size(108, 20);
+            label1.TabIndex = 2;
+            label1.Text = "Normal Mapa: ";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 554);
+            label2.Name = "label2";
+            label2.Size = new Size(66, 20);
+            label2.TabIndex = 3;
+            label2.Text = "Tekstura:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1136, 571);
+            ClientSize = new Size(1194, 583);
+            Controls.Add(labelNormalMap);
+            Controls.Add(labelTexture);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(groupBoxOptions);
             Controls.Add(canvas);
             Name = "Form1";
@@ -498,6 +542,7 @@
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarTrianglesN).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -538,5 +583,9 @@
         private Button buttonChooseNormalMap;
         private CheckBox checkBoxTexture;
         private Button buttonTexture;
+        private Label labelTexture;
+        private Label labelNormalMap;
+        private Label label1;
+        private Label label2;
     }
 }
