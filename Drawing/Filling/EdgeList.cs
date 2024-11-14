@@ -39,9 +39,10 @@ namespace Drawing.Filling
 
     public class EdgeItem
     {
-        public float YMax { get; set; }
-        public float XMin { get; set; }
-        public float XMax { get; set; }
+        public int YMax { get; set; }
+        public int XMin { get; set; }
+        public int EXMin {  get; set; }
+        public int EXMax { get; set; }
         public float OneOverM { get; set; }
         public float X { get; set; }
         public void Update()
@@ -52,19 +53,26 @@ namespace Drawing.Filling
         public EdgeItem(Edge e) 
         {
             _E = e;
-            YMax = e.A.PR.Y >= e.B.PR.Y ? e.A.PR.Y : e.B.PR.Y;
+            YMax = (int) (e.A.PR.Y >= e.B.PR.Y ? e.A.PR.Y : e.B.PR.Y);
             if (e.A.PR.Y <= e.B.PR.Y) 
             {
-                XMin = e.A.PR.X;
-                XMax = e.B.PR.X;
+                XMin = (int) e.A.PR.X;
             }
             else
             {
-                XMin = e.B.PR.X;
-                XMax = e.A.PR.X;
+                XMin = (int) e.B.PR.X;
             }
             //XMin = e.A.PR.Y <= e.B.PR.Y ? e.A.PR.X : e.B.PR.X;
-       
+            if(e.A.PR.X <= e.B.PR.X)
+            {
+                EXMin = (int)e.A.PR.X;
+                EXMax = (int)e.B.PR.X;
+            }
+            else
+            {
+                EXMin = (int)e.B.PR.X;
+                EXMax = (int)e.A.PR.X;
+            }
 
             //float numenator = (e.A.PR.X - e.B.PR.X);
             //float denominator = (e.A.PR.Y - e.B.PR.Y);

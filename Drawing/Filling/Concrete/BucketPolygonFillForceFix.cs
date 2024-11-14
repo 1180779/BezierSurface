@@ -12,21 +12,19 @@ using System.Xml.Linq;
 
 namespace Drawing.Filling.Concrete
 {
-    public class BucketPolygonFill : IPolygonFill
+    public class BucketPolygonFillForceFix : IPolygonFill
     {
-        private EdgeTable? ET;
-        private EdgeList? AET;
         public IScanDraw ScanDraw {  get; set; }
-        public BucketPolygonFill(IScanDraw scanDraw)
+        public BucketPolygonFillForceFix(IScanDraw scanDraw)
         {
             ScanDraw = scanDraw;
         }
         public void FillPolygon(Triangle t, DrawingData bitmapData)
         {
-            ET = new EdgeTable(bitmapData.DBitmap.Height);
+            EdgeTable ET = new EdgeTable(bitmapData.DBitmap.Height);
             ET.Fill(t);
             // ustaw AETjako pusta lista
-            AET = new EdgeList();
+            EdgeList AET = new EdgeList();
 
             // ustaw y na najmniejszą wartość indeksu, dla którego wartość 
             // ET jest niepusta
@@ -50,8 +48,8 @@ namespace Drawing.Filling.Concrete
                 if (AET.Edges.Count == 1)
                 {
                     ScanDraw.DrawScan(
-                        (int)AET.Edges[0].X,
-                        (int)AET.Edges[0].X,
+                        (int)(AET.Edges[0].X),
+                        (int)(AET.Edges[0].X),
                         i,
                         t,
                         bitmapData);
@@ -59,8 +57,8 @@ namespace Drawing.Filling.Concrete
                 else if(AET.Edges.Count == 3)
                 {
                     ScanDraw.DrawScan(
-                        (int)AET.Edges[0].X,
-                        (int)AET.Edges[2].X,
+                        (int)(AET.Edges[0].X),
+                        (int)(AET.Edges[2].X),
                         i,
                         t,
                         bitmapData);
@@ -70,8 +68,8 @@ namespace Drawing.Filling.Concrete
                     for (int j = 0; j < AET.Edges.Count; j += 2)
                     {
                         ScanDraw.DrawScan(
-                        (int)AET.Edges[j].X,
-                        (int)AET.Edges[j + 1].X,
+                        (int)(AET.Edges[j].X),
+                        (int)(AET.Edges[j + 1].X),
                         i,
                         t,
                         bitmapData);
@@ -79,7 +77,7 @@ namespace Drawing.Filling.Concrete
                 }
 
                 // usuń z AET te elementy, dla których y = ymax
-                AET.Edges.RemoveAll(e => (int)e.YMax == i); 
+                AET.Edges.RemoveAll(e => e.YMax == i); 
 
                 // zwiększ y o 1 (przejście do następnej scan-linii)
                 ++i;
@@ -87,9 +85,16 @@ namespace Drawing.Filling.Concrete
                 // dla każdej krawędzi w AET 
                 // uaktualnij x dla nowej scanlinii y(x+= 1 / m)
                 AET.Update();
+
+                // fix wrong Xs by force
+                AET.Edges.ForEach(e =>
+                {
+                    if (e.X < e.EXMin)
+                        e.X = e.EXMin;
+                    else if (e.X > e.EXMax)
+                        e.X = e.EXMax;
+                });
             }
-            ET = null;
-            AET = null;
         }
     }
 }

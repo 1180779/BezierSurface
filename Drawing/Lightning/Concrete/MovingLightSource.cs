@@ -120,7 +120,6 @@ namespace Drawing.Lightning.Concrete
                 sw.Start();
                 while (!tData.CancellationToken.IsCancellationRequested)
                 {
-                    Thread.Sleep(tData.SleepMiliseconds);
                     lock(tData.source._configLock)
                     {
                         lock (tData.ParameterLock)

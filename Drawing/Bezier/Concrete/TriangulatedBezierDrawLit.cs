@@ -21,10 +21,14 @@ namespace Drawing.Bezier.Concrete
 
         public void Draw(TriangulatedBezierSurface bs, DrawingData bitmapData)
         {
-            foreach (var triangle in bs.Triangles)
+            Parallel.ForEach(bs.Triangles, (t) =>
             {
-                PolygonFill.FillPolygon(triangle, bitmapData);
-            }
+                PolygonFill.FillPolygon(t, bitmapData);
+            });
+            //foreach (var triangle in bs.Triangles)
+            //{
+            //    PolygonFill.FillPolygon(triangle, bitmapData);
+            //}
             //PolygonFill.FillPolygon(bs.Triangles[0], bitmapData);
         }
     }

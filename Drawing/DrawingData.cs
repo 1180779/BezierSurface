@@ -24,7 +24,7 @@ namespace Drawing
             LightSParams.PropertyChanged += RecalculatePartialLightComputations;
 
             //LightS = new LightSource(new Vector3(0, 0, 100), Color.White); // new Vector3(-100, -1000, 0)
-            LightS = new MovingLightSource(new Vector3(0, 0, -400), Color.White, configLock); // new Vector3(-100, -1000, 0)
+            LightS = new MovingLightSource(new Vector3(0, 0, 100), Color.White, configLock); // new Vector3(-100, -1000, 0)
             LightS.StartMoving();
             LightS.PropertyChanged += RecalculatePartialLightComputations;
 
@@ -34,16 +34,22 @@ namespace Drawing
             RecalculatePartialLightComputations(null, new PropertyChangedEventArgs(""));
 
             if (normalMapFile != "")
-                ChangeNormalMap(normalMapFile);
+                if (!ChangeNormalMap(normalMapFile))
+                    throw new Exception();
             if(textureFile != "")
-                ChangeTexture(textureFile);
-            
+                if(!ChangeTexture(textureFile))
+                    throw new Exception();
+
         }
         public Bitmap Texture { get; set; }
         public Vector3[,] TexturePreprocessed { get; set; }
-        public Bitmap NormalMap { get; set; }
+        public DirectBitmap NormalMap { get; set; }
         public int AdjX { get; set; }
         public int AdjY { get; set; }
+        public int TextureWidth { get; private set; }
+        public int TextureHeight { get; private set; }
+        public int NormalmapWidth { get; private set; }
+        public int NormalmapHeight { get; private set; }
         public DirectBitmap DBitmap { get; set; }
         public Graphics? G { get; set; }
         public Pen? Pen { get; set; }
@@ -58,7 +64,20 @@ namespace Drawing
         {
             if (!File.Exists(filePath))
                 return false;
-            NormalMap = new Bitmap(filePath);
+            Bitmap temp = new Bitmap(filePath);
+            NormalmapWidth = temp.Width;
+            NormalmapHeight = temp.Height;
+            NormalMap = new DirectBitmap(NormalmapWidth, NormalmapHeight);
+
+            // copy to direct bitmap
+            for(int i = 0; i < NormalmapWidth; ++i)
+            {
+                for(int j = 0; j < NormalmapHeight; ++j)
+                {
+                    var tempP = temp.GetPixel(i, j);
+                    NormalMap.SetPixel(i, j, Color.FromArgb(tempP.R, tempP.G, tempP.B));
+                }
+            }
             return true;
         }
 
@@ -69,9 +88,11 @@ namespace Drawing
             Texture = new Bitmap(filePath);
             TexturePreprocessed = new Vector3[Texture.Width, Texture.Height];
             Color c;
-            for(int i = 0; i < Texture.Width; ++i)
+            TextureWidth = Texture.Width;
+            TextureHeight = Texture.Height;
+            for (int i = 0; i < Texture.Width; ++i)
             {
-                for(int j = 0; j < Texture.Height; ++j)
+                for (int j = 0; j < Texture.Height; ++j)
                 {
                     c = Texture.GetPixel(i, j);
                     TexturePreprocessed[i, j] = new Vector3(
@@ -80,7 +101,23 @@ namespace Drawing
                         c.B / 255f);
                 }
             }
+            //Thread thread = new Thread(() =>
+            //{
+            //    for (int i = 0; i < Texture.Width; ++i)
+            //    {
+            //        for (int j = 0; j < Texture.Height; ++j)
+            //        {
+            //            c = Texture.GetPixel(i, j);
+            //            TexturePreprocessed[i, j] = new Vector3(
+            //                c.R / 255f,
+            //                c.G / 255f,
+            //                c.B / 255f);
+            //        }
+            //    }
+            //});
+            //thread.Start();
             return true;
         }
+
     }
 }

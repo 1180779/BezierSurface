@@ -35,14 +35,16 @@ namespace Drawing
             SurfaceTrianglesDraw = new TriangulatedBezierDraw(
                 new TriangleDrawRotation(new LibraryVector3Draw(1), lineDraw));
 
+            // BucketPolygonFillTest
+            // BucketPolygonFill
             _surfaceDraw = new TriangulatedBezierDrawLit(
-                new BucketPolygonFill(new ScanDraw(new PixelColor())));
+                new BucketPolygonFillForceFix(new ScanDraw(new PixelColor())));
             _surfaceDrawTexture = new TriangulatedBezierDrawLit(
-               new BucketPolygonFill(new ScanDraw(new PixelColorTexture())));
+               new BucketPolygonFillForceFix(new ScanDraw(new PixelColorTexture())));
             _surfaceDrawNormalMap = new TriangulatedBezierDrawLit(
-                new BucketPolygonFill(new ScanDraw(new PixelColorNormalMap())));
+                new BucketPolygonFillForceFix(new ScanDraw(new PixelColorNormalMap())));
             _surfaceDrawTextureNormalMap = new TriangulatedBezierDrawLit(
-                new BucketPolygonFill(new ScanDraw(new PixelColorTextureNormalMap())));
+                new BucketPolygonFillForceFix(new ScanDraw(new PixelColorTextureNormalMap())));
             SurfaceDraw = _surfaceDraw;
         }
         private static ITriangulatedBezierDraw _surfaceDraw;

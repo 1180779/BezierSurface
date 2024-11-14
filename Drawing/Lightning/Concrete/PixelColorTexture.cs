@@ -28,8 +28,8 @@ namespace Drawing.Lightning.Concrete
             float u = Math.Max(0, Math.Min(1f, lambda.X * t.A.U + lambda.Y * t.B.U + lambda.Z * t.C.U));
             float v = Math.Max(0, Math.Min(1f, lambda.X * t.A.V + lambda.Y * t.B.V + lambda.Z * t.C.V));
             // add color from texture
-            var (i, j) = ((int) (u * (bitmapData.Texture.Width - 1)), 
-                (int)(v * (bitmapData.Texture.Width - 1)) );
+            var (i, j) = ((int) (u * (bitmapData.TextureWidth - 1)), 
+                (int)(v * (bitmapData.TextureHeight - 1)) );
             Vector3 color = bitmapData.PartialLightComputations.ATexture * bitmapData.TexturePreprocessed[i, j] * cosNL +
                 bitmapData.PartialLightComputations.BTexture * bitmapData.TexturePreprocessed[i, j] * 
                 (float)Math.Pow(cosVR, bitmapData.LightSParams.M);
