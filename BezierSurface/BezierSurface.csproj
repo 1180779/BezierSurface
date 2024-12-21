@@ -20,10 +20,10 @@
     <None Update="normalMap2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Points_.txt">
+    <None Update="Points.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Points.txt">
+    <None Update="Points__.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="texture.jpeg">

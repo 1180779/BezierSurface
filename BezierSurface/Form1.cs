@@ -38,6 +38,8 @@ namespace BezierSurface
         {
             InitializeComponent();
 
+            NormalMapGenerator.Generate(-10, 10);
+
             _dbitmap = new DirectBitmap(canvas.Width, canvas.Height);
             canvas.Image = _dbitmap.Bitmap;
 

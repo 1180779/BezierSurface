@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Objects", "Objects\Objects.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drawing", "Drawing\Drawing.csproj", "{B0DAACEE-4C18-426F-9A86-A6E9F7FBE689}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointsFileGenerator", "PointsFileGenerator\PointsFileGenerator.csproj", "{BF9C784A-4B2F-4D90-96A2-6D84F0E63802}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PointsFileGenerator", "PointsFileGenerator\PointsFileGenerator.csproj", "{BF9C784A-4B2F-4D90-96A2-6D84F0E63802}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NormalMapGenerator", "NormalMapGenerator\NormalMapGenerator.csproj", "{19F10FEF-CA71-4D39-8639-A6D6C85EFACA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BF9C784A-4B2F-4D90-96A2-6D84F0E63802}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF9C784A-4B2F-4D90-96A2-6D84F0E63802}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF9C784A-4B2F-4D90-96A2-6D84F0E63802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F10FEF-CA71-4D39-8639-A6D6C85EFACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F10FEF-CA71-4D39-8639-A6D6C85EFACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F10FEF-CA71-4D39-8639-A6D6C85EFACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F10FEF-CA71-4D39-8639-A6D6C85EFACA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

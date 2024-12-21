@@ -52,6 +52,12 @@ namespace Objects.Bezier
         public Vertex[,] Points { get { return _v; } }
         private Vertex[,] _v;
 
+        public BezierSufrace(Vertex[,] T)
+        {
+            _v = T;
+            _V = new Vector3Matrix4x4(_v);
+        }
+
         public BezierSufrace(string file)
         {
             var stream = new StreamReader(file);
